@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>只给小frennie的游戏☆☆ - Alv_Nie.com</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            background: #000;
+        }
+        
+        .section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .section.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        /* Intro Section */
+        .intro-section {
+            background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 50%, #ffb6c1 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 1px, transparent 1px),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.2) 1px, transparent 1px),
+                linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
+            background-size: 60px 60px, 80px 80px, 40px 40px, 40px 40px;
+            animation: wavePattern 8s ease-in-out infinite;
+        }
+        
+        @keyframes wavePattern {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-10px) translateY(-5px); }
+            50% { transform: translateX(5px) translateY(-10px); }
+            75% { transform: translateX(-5px) translateY(5px); }
+        }
+        
+        .intro-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .game-title {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        .star {
+            color: #ffd700;
+            text-shadow: 0 0 10px #ffd700;
+            animation: starTwinkle 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            0% { text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+            100% { text-shadow: 2px 2px 8px rgba(0,0,0,0.2), 0 0 15px rgba(255,182,193,0.5); }
+        }
+        
+        @keyframes starTwinkle {
+            0% { text-shadow: 0 0 5px #ffd700; }
+            100% { text-shadow: 0 0 20px #ffd700, 0 0 30px #ffed4e; }
+        }
+        
+        .start-button {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 16px rgba(255,20,147,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(255,20,147,0.4);
+        }
+        
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .start-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Bubbles */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+            animation: bubbleFloat 6s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+        
+        @keyframes bubbleFloat {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        /* Quiz Section */
+        .quiz-section {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .quiz-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(1px);
+        }
+        
+        .quiz-content {
+            background: rgba(255,255,255,0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .quiz-instruction {
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .question {
+            font-size: 1.8em;
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+        
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            background: linear-gradient(45deg, #74b9ff, #0984e3);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.3em;
+            font-weight: 500;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(116,185,255,0.3);
+            min-width: 120px;
+        }
+        
+        .option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(116,185,255,0.4);
+            background: linear-gradient(45deg, #0984e3, #74b9ff);
+        }
+        
+        .progress {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+        
+        /* Ending Section */
+        .ending-section {
+            background: linear-gradient(135deg, #ffb6c1 0%, #ffc0cb 50%, #ffb6c1 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ending-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 70%;
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            filter: brightness(0.7);
+        }
+        
+        .ending-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        
+        .message-container {
+            width: 80%;
+            height: 70%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .scrolling-message {
+            font-size: 1.6em;
+            line-height: 2.2;
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.9), 0 0 10px rgba(255,255,255,0.3);
+            font-weight: 400;
+            position: absolute;
+            width: 100%;
+            animation: scrollUp 110s linear forwards;
+            white-space: pre-line;
+            letter-spacing: 1px;
+            font-family: 'Noto Sans SC', serif;
+        }
+        
+        @keyframes scrollUp {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+                filter: blur(2px);
+            }
+            8% {
+                opacity: 1;
+                filter: blur(0px);
+            }
+            92% {
+                opacity: 1;
+                filter: blur(0px);
+            }
+            100% {
+                transform: translateY(-100%);
+                opacity: 0.3;
+                filter: blur(1px);
+            }
+        }
+        
+        .final-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2.2em;
+            font-weight: 600;
+            color: #ffb6c1;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.9), 0 0 15px rgba(255,182,193,0.8), 0 0 30px rgba(255,255,255,0.4);
+            text-align: center;
+            opacity: 0;
+            animation: finalAppear 4s ease-in-out 113s forwards;
+            letter-spacing: 2px;
+            font-family: 'Noto Sans SC', serif;
+        }
+        
+        @keyframes finalAppear {
+            0% { 
+                opacity: 0; 
+                transform: translate(-50%, -50%) scale(0.5) rotate(-5deg); 
+                filter: blur(3px);
+            }
+            50% { 
+                opacity: 0.8; 
+                transform: translate(-50%, -50%) scale(1.1) rotate(2deg); 
+                filter: blur(1px);
+            }
+            100% { 
+                opacity: 1; 
+                transform: translate(-50%, -50%) scale(1) rotate(0deg); 
+                filter: blur(0px);
+            }
+        }
+        
+        /* Stars and Moon */
+        .star-element {
+            position: absolute;
+            color: #ffd700;
+            font-size: 2em;
+            animation: starFlicker 2s ease-in-out infinite;
+            opacity: 0;
+        }
+        
+        .moon {
+            position: absolute;
+            top: 20%;
+            right: 20%;
+            font-size: 4em;
+            color: #f4f4f4;
+            opacity: 0;
+            animation: moonGlow 4s ease-in-out 113s forwards;
+        }
+        
+        @keyframes starFlicker {
+            0%, 100% { opacity: 0; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        @keyframes moonGlow {
+            0% { opacity: 0; }
+            100% { opacity: 0.8; text-shadow: 0 0 20px #f4f4f4; }
+        }
+        
+        /* Background images for quiz */
+        .bg-sky { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="100%" style="stop-color:%23E0F6FF;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="800" fill="url(%23sky)"/><circle cx="200" cy="150" r="60" fill="white" opacity="0.8"/><circle cx="400" cy="120" r="80" fill="white" opacity="0.9"/><circle cx="600" cy="180" r="70" fill="white" opacity="0.7"/><circle cx="900" cy="140" r="90" fill="white" opacity="0.8"/></svg>'); }
+        
+        .bg-sunrise { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="sunrise" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%23FFB347;stop-opacity:1" /><stop offset="50%" style="stop-color:%23FFA07A;stop-opacity:1" /><stop offset="100%" style="stop-color:%2387CEEB;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="800" fill="url(%23sunrise)"/><circle cx="900" cy="200" r="80" fill="%23FFD700" opacity="0.9"/><path d="M0,600 Q300,500 600,550 T1200,600 L1200,800 L0,800 Z" fill="%234682B4" opacity="0.8"/></svg>'); }
+        
+        .bg-countryside { background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="countryside" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2387CEEB;stop-opacity:1" /><stop offset="100%" style="stop-color:%23E0F6FF;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="800" fill="url(%23countryside)"/><path d="M0,500 Q200,400 400,450 T800,500 L800,800 L0,800 Z" fill="%23228B22"/><path d="M200,400 L300,350 L400,400 L400,800 L200,800 Z" fill="%23006400"/><rect x="250" y="450" width="100" height="80" fill="%23D2B48C"/><polygon points="250,450 300,400 350,450" fill="%23A0522D"/></svg>'); }
+        
+        /* Audio elements */
+        audio {
+            display: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .game-title {
+                font-size: 2.5em;
+            }
+            
+            .quiz-content {
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .question {
+                font-size: 1.4em;
+            }
+            
+            .options {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .scrolling-message {
+                font-size: 1.1em;
+                padding: 0 20px;
+            }
+            
+            .final-message {
+                font-size: 1.5em;
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio elements -->
+    <audio id="introMusic" loop>
+        <source src="intro-music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="quizMusic" loop>
+        <source src="quiz-music.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="endingMusic">
+        <source src="ending-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Intro Section -->
+    <div class="section intro-section active" id="introSection">
+        <div class="intro-content">
+            <h1 class="game-title">只给小frennie的游戏<span class="star">☆☆</span></h1>
+            <button class="start-button" onclick="startGame()">开始游戏</button>
+        </div>
+    </div>
+
+    <!-- Quiz Section -->
+    <div class="section quiz-section" id="quizSection">
+        <div class="quiz-content">
+            <p class="quiz-instruction">是的话选择"嗯"，不是的话就选择"不是"</p>
+            <div class="question" id="questionText"></div>
+            <div class="options">
+                <button class="option" onclick="nextQuestion()">嗯</button>
+                <button class="option" onclick="nextQuestion()">不是</button>
+            </div>
+            <div class="progress" id="progressText"></div>
+        </div>
+    </div>
+
+    <!-- Ending Section -->
+    <div class="section ending-section" id="endingSection">
+        <div class="ending-bg" id="endingBg"></div>
+        <div class="ending-content">
+            <div class="message-container">
+                <div class="scrolling-message" id="scrollingMessage"></div>
+                <div class="final-message" id="finalMessage">我爱你，我的小Frennie，祝你幸福</div>
+            </div>
+        </div>
+        <div class="moon">🌙</div>
+        <div class="star-element" style="top: 15%; left: 15%; animation-delay: 113s;">⭐</div>
+        <div class="star-element" style="top: 25%; left: 80%; animation-delay: 113.5s;">✨</div>
+        <div class="star-element" style="top: 70%; left: 20%; animation-delay: 114s;">⭐</div>
+        <div class="star-element" style="top: 60%; left: 75%; animation-delay: 113.3s;">✨</div>
+        <div class="star-element" style="top: 40%; left: 90%; animation-delay: 114.2s;">⭐</div>
+        <div class="star-element" style="top: 80%; left: 60%; animation-delay: 113.8s;">✨</div>
+    </div>
+
+    <script>
+        const questions = [
+            "你心裡還有他嗎?",
+            "為什麼你是否看到他的時候會感到傷心和難過?",
+            "你是不是害怕他在做任何傷害自己的事情?",
+            "你是不是很自責離開了他让他痛苦了?",
+            "你會不會害怕在看到他的時候會想起你們的回憶然后很难面对他?",
+            "為什麼每次他問你事情的時候,你都會很排斥他,是因為他傷害了你嗎?讓你傷心難過委屈了嗎?你接受不了嗎?還是說他強迫了你,給予了你很大的壓力呢?",
+            "你有没有原谅他给你带来的伤害，有没有理解他没有做到的理由?",
+            "假如说你能够理解的话他也好起来了,你还愿不愿意跟他再重新来过一次?",
+            "如果这样做你会不会感觉到很痛苦?",
+            "他所做的努力,其实你有没有看在眼里,有没有感动到?",
+            "你有没有觉得你是个小傻瓜,因为他明明那么的爱你,但是你没有感觉到,然后要离开他了,放弃了一个你喜欢他，他也喜欢你的人？",
+            "你会放下这段感情嗎，哪怕错过了就再也没机会遇到了，这样的放下会让你遗憾一辈子吗?"
+        ];
+
+        // 12张日系动漫背景图，对应12个问题
+        // 如果图片不显示，临时使用渐变色背景
+        const backgrounds = [
+            'your-photo1.jpg',
+            'your-photo2.jpg', 
+            'your-photo3.jpg',
+            'your-photo4.jpg',
+            'your-photo5.jpg',
+            'your-photo6.jpg',
+            'your-photo7.jpg',
+            'your-photo8.jpg',
+            'your-photo9.jpg',
+            'your-photo10.jpg',
+            'your-photo11.jpg',
+            'your-photo12.jpg'
+        ];
+        
+        // 备用渐变色背景
+        const fallbackBackgrounds = [
+            'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+            'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+            'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+            'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
+            'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
+            'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)',
+            'linear-gradient(135deg, #ff8a80 0%, #ea6100 100%)',
+            'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+            'linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)',
+            'linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%)',
+            'linear-gradient(135deg, #fdbb2d 0%, #22c1c3 100%)'
+        ];
+        let currentQuestion = 0;
+
+        const endingMessage = `其实答案并不重要，小傻瓜
+别再钻牛角尖啦
+也别再想到我就痛苦了噢
+
+我们明明过得那么开心
+你想想呀去年我那么地照顾你
+那么地在乎你所说的事情
+
+哪有一个不爱你的男生
+会时时刻刻记得
+所有你的事情呢
+
+我知道其实有的时候
+你内心是在崩塌边缘的
+总是一个人默默承受
+
+虽然表面上装得很坚强
+不过都是为了让我们觉得
+不要担心你
+
+所以我才会没发现到
+你总是一个人哭泣
+是我不细心了
+
+你只不过是个很要强的小女生
+其实内心很脆弱也很胆小
+有时候总觉得自己很无助
+
+即便你什么都没说
+却又希望有人知道
+你内心的绝望感
+
+那个了解你的人会拉你一把
+哪怕只是一次
+也能拯救你的心
+
+我想你会喜欢上我
+肯定是因为你没想过
+会有人用温柔接住了你快崩塌的世界
+
+你也说过我就好像星辰
+我很荣幸你能那么信任我
+所以我才会在你有困难的时候
+
+无条件的给你一盏灯
+也像星辰一样
+指引着你
+
+我呀，早在我们住在一起的时候
+就努力的耐心的守候着
+那个非常不完美的你
+
+因为那个人是你
+所以你的性格
+你的每个习惯我都会很喜欢着
+
+其实合适的人
+都会经历百次的不合适
+没有天生就合适的两个人
+
+只有两个愿意磨合的心
+对我来说
+我爱上你没什么了不起
+
+但我会爱下去
+才了不起
+
+如今的我不再黑暗里沉沦
+也找到自己的目标了
+现在的你
+
+如果找到了你想要的人和方向
+就往那个方向奔跑吧
+我祝福你
+
+愿你这一生
+都能快快乐乐`;
+
+        function createBubbles() {
+            const bubbleContainer = document.querySelector('.intro-section');
+            setInterval(() => {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 60 + 20;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                bubble.style.animationDelay = Math.random() * 2 + 's';
+                bubbleContainer.appendChild(bubble);
+                
+                setTimeout(() => {
+                    bubble.remove();
+                }, 8000);
+            }, 500);
+        }
+
+        function startGame() {
+            document.getElementById('introSection').classList.remove('active');
+            document.getElementById('quizSection').classList.add('active');
+            
+            // Stop intro music, start quiz music
+            document.getElementById('introMusic').pause();
+            document.getElementById('quizMusic').play();
+            
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const questionElement = document.getElementById('questionText');
+            const progressElement = document.getElementById('progressText');
+            const quizSection = document.getElementById('quizSection');
+            
+            questionElement.textContent = questions[currentQuestion];
+            progressElement.textContent = `问题 ${currentQuestion + 1} / ${questions.length}`;
+            
+            // 设置对应的日系动漫背景图
+            quizSection.className = 'section quiz-section active';
+            
+            // 先尝试加载图片，如果失败则使用渐变色背景
+            const img = new Image();
+            img.onload = function() {
+                quizSection.style.backgroundImage = `url("${backgrounds[currentQuestion]}")`;
+                console.log(`成功加载背景图: ${backgrounds[currentQuestion]}`);
+            };
+            img.onerror = function() {
+                quizSection.style.backgroundImage = fallbackBackgrounds[currentQuestion];
+                console.log(`图片加载失败，使用渐变色背景: ${backgrounds[currentQuestion]}`);
+            };
+            img.src = backgrounds[currentQuestion];
+            
+            quizSection.style.backgroundSize = 'cover';
+            quizSection.style.backgroundPosition = 'center';
+            quizSection.style.backgroundRepeat = 'no-repeat';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                startEnding();
+            }
+        }
+
+        function startEnding() {
+            document.getElementById('quizSection').classList.remove('active');
+            document.getElementById('endingSection').classList.add('active');
+            
+            // Stop quiz music, start ending music
+            document.getElementById('quizMusic').pause();
+            document.getElementById('endingMusic').play();
+            
+            // 设置情侣照片作为结尾背景
+            document.getElementById('endingBg').style.backgroundImage = 'url("couple-photo.jpg")';
+            console.log('正在加载情侣照片: couple-photo.jpg');
+            
+            // Start scrolling message
+            document.getElementById('scrollingMessage').textContent = endingMessage;
+            
+            // Show stars when final message appears (1分50秒 + 3秒 = 113秒)
+            setTimeout(() => {
+                const stars = document.querySelectorAll('.star-element');
+                stars.forEach(star => {
+                    star.style.animationPlayState = 'running';
+                });
+            }, 113000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createBubbles();
+            
+            // Note: YouTube links cannot be used directly as audio sources
+            // You'll need to convert these to actual audio files (mp3, wav, etc.)
+            // and replace the src attributes in the audio elements
+            console.log('Note: Please replace YouTube links with actual audio files');
+        });
+    </script>
+</body>
+</html>
