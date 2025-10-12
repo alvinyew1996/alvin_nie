@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《我们之间的故事》- 演示页面</title>
+    <style>
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8ddd4 100%);
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #8b4513;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            color: #5a4a3a;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-section h2 {
+            color: #8b4513;
+            margin-bottom: 20px;
+        }
+        
+        .feature-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .feature-list li {
+            margin: 10px 0;
+            color: #5a4a3a;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #8b4513;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+        }
+        
+        .btn:hover {
+            background: #a0522d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+        }
+        
+        .file-structure {
+            background: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>《我们之间的故事》</h1>
+        <p class="subtitle">——献给那个曾经让我笑、让我成长的人</p>
+        
+        <div class="demo-section">
+            <h2>🎬 项目特色</h2>
+            <div class="feature-list">
+                <ul>
+                    <li>📖 <strong>3D翻书动画封面</strong> - 书本缓缓翻开，配合粒子飘散效果</li>
+                    <li>🎵 <strong>多首背景音乐</strong> - 根据章节自动切换，营造情感氛围</li>
+                    <li>📸 <strong>多种照片展示</strong> - 淡入、拼贴、横向滚动等效果</li>
+                    <li>🎬 <strong>视频播放</strong> - 自动播放笑容视频，暂停音乐</li>
+                    <li>🎤 <strong>语音播放</strong> - 配合字幕同步显示</li>
+                    <li>✨ <strong>星空结尾</strong> - 动态星空背景，月亮闪烁效果</li>
+                    <li>📱 <strong>响应式设计</strong> - 支持移动端和桌面端</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>📁 文件结构</h2>
+            <div class="file-structure">
+├── index.html          # 主页面
+├── styles.css          # 样式文件
+├── script.js           # 交互脚本
+├── images/             # 图片文件夹
+│   ├── meeting.jpg     # 初遇照片
+│   ├── together1-12.jpg # 相处时光照片
+│   ├── travel1-4.jpg   # 旅行照片
+│   └── final.jpg       # 最后笑容照片
+├── videos/             # 视频文件夹
+│   └── smile.mp4       # 笑容视频
+└── audio/              # 音频文件夹
+    ├── rain-love.mp3   # 雨爱 - 杨丞琳
+    ├── left-person.mp3 # 左边的人 - 陈华
+    ├── lie.mp3         # 骗 - 张碧晨
+    └── voice.mp3       # 语音片段
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🎯 使用步骤</h2>
+            <div class="feature-list">
+                <ol>
+                    <li>准备所有媒体文件（图片、音频、视频）</li>
+                    <li>将文件放入对应的文件夹中</li>
+                    <li>在浏览器中打开 <code>index.html</code></li>
+                    <li>使用鼠标滚轮或键盘方向键浏览</li>
+                    <li>在移动设备上可以使用滑动手势</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="warning">
+            <h3>⚠️ 注意事项</h3>
+            <p>由于这是一个演示页面，实际的媒体文件（图片、音频、视频）需要您自己准备。请参考 <code>使用说明.md</code> 文件了解详细的配置要求。</p>
+        </div>
+        
+        <div class="success">
+            <h3>✅ 技术特点</h3>
+            <p>网页使用纯HTML、CSS和JavaScript构建，无需任何框架或库。具有完善的性能优化、错误处理和响应式设计。</p>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🚀 快速开始</h2>
+            <a href="index.html" class="btn">查看完整网页</a>
+            <a href="使用说明.md" class="btn">查看使用说明</a>
+            <a href="create_sample_audio.html" class="btn">生成占位图片</a>
+        </div>
+        
+        <div class="demo-section">
+            <h2>💝 设计理念</h2>
+            <p style="color: #5a4a3a; line-height: 1.8;">
+                这个网页的设计理念是"温柔、怀旧、纪念感、释怀"。通过温暖的米黄色调、柔和的动画效果、
+                多种媒体形式和渐进式的情感节奏，创造一份珍贵的数字回忆录。
+                它不是冷冰冰的作品，而是一段柔软的回忆，一次真心的"谢谢你"。
+            </p>
+        </div>
+    </div>
+</body>
+</html>
