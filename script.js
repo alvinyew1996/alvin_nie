@@ -200,21 +200,84 @@ function handleChapterChange(chapterIndex) {
     }
 }
 
+// 第一章翻页功能
+let currentPage = 1;
+const totalPages = 3;
+
+function setupPageNavigation() {
+    const prevBtn = document.querySelector('.prev-page');
+    const nextBtn = document.querySelector('.next-page');
+    const pageIndicator = document.querySelector('.page-indicator');
+    
+    if (prevBtn && nextBtn && pageIndicator) {
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePageDisplay();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePageDisplay();
+            }
+        });
+    }
+}
+
+function updatePageDisplay() {
+    const pages = document.querySelectorAll('.page');
+    const prevBtn = document.querySelector('.prev-page');
+    const nextBtn = document.querySelector('.next-page');
+    const pageIndicator = document.querySelector('.page-indicator');
+    
+    pages.forEach((page, index) => {
+        page.classList.remove('active', 'prev', 'next');
+        if (index + 1 === currentPage) {
+            page.classList.add('active');
+        } else if (index + 1 < currentPage) {
+            page.classList.add('prev');
+        } else {
+            page.classList.add('next');
+        }
+    });
+    
+    if (prevBtn) {
+        prevBtn.disabled = currentPage === 1;
+    }
+    if (nextBtn) {
+        nextBtn.disabled = currentPage === totalPages;
+    }
+    if (pageIndicator) {
+        pageIndicator.textContent = `${currentPage} / ${totalPages}`;
+    }
+}
+
 // 第一章动画
 function animateChapter1() {
-    const photo = document.querySelector('.fade-in-photo');
+    const photo = document.querySelector('.page-1 .fade-in-photo');
     if (photo) {
         setTimeout(() => {
             photo.classList.add('visible');
         }, 500);
     }
+    
+    // 8秒后启用翻页功能
+    setTimeout(() => {
+        const pageControls = document.querySelector('.page-controls');
+        if (pageControls) {
+            pageControls.style.opacity = '1';
+            pageControls.style.pointerEvents = 'auto';
+        }
+    }, 8000);
 }
 
 // 第二章动画
 function animateChapter2() {
     const photoItems = document.querySelectorAll('.photo-item');
     photoItems.forEach((item, index) => {
-        const delay = parseInt(item.dataset.delay) || index * 200;
+        const delay = parseInt(item.dataset.delay) || index * 5000;
         setTimeout(() => {
             item.classList.add('visible');
         }, delay);
@@ -224,12 +287,34 @@ function animateChapter2() {
 // 第三章动画
 function animateChapter3() {
     const travelPhotos = document.querySelectorAll('.travel-photo');
+    const travelVideos = document.querySelectorAll('.travel-video');
+    
+    // 照片动画
     travelPhotos.forEach((photo, index) => {
         setTimeout(() => {
             photo.style.opacity = '1';
             photo.style.transform = 'translateY(0)';
         }, index * 300);
     });
+    
+    // 视频播放
+    let currentVideoIndex = 0;
+    const playNextVideo = () => {
+        if (currentVideoIndex < travelVideos.length) {
+            const video = travelVideos[currentVideoIndex];
+            video.classList.add('active');
+            video.play();
+            
+            video.addEventListener('ended', () => {
+                video.classList.remove('active');
+                currentVideoIndex++;
+                setTimeout(playNextVideo, 1000);
+            });
+        }
+    };
+    
+    // 延迟开始播放视频
+    setTimeout(playNextVideo, 2000);
 }
 
 // 第四章动画
@@ -340,7 +425,9 @@ function handleError(error, context) {
 // 预加载媒体文件
 function preloadMedia() {
     const mediaFiles = [
-        'images/meeting.jpg',
+        'images/meeting1.jpg',
+        'images/meeting2.jpg',
+        'images/meeting3.jpg',
         'images/together1.jpg',
         'images/together2.jpg',
         'images/together3.jpg',
@@ -353,12 +440,18 @@ function preloadMedia() {
         'images/together10.jpg',
         'images/together11.jpg',
         'images/together12.jpg',
+        'images/together13.jpg',
+        'images/together14.jpg',
+        'images/together15.jpg',
         'images/travel1.jpg',
         'images/travel2.jpg',
         'images/travel3.jpg',
         'images/travel4.jpg',
         'images/final.jpg',
         'videos/smile.mp4',
+        'videos/travel1.mp4',
+        'videos/travel2.mp4',
+        'videos/travel3.mp4',
         'audio/rain-love.mp3',
         'audio/left-person.mp3',
         'audio/lie.mp3',
@@ -399,6 +492,7 @@ function init() {
         setupScrollListener();
         setupMusicControl();
         setupProgressIndicator();
+        setupPageNavigation();
         preloadMedia();
         
         // 隐藏加载屏幕
@@ -421,6 +515,13 @@ function init() {
         fadeElements.forEach(element => {
             element.classList.add('fade-in');
         });
+        
+        // 初始化页面控制按钮透明度
+        const pageControls = document.querySelector('.page-controls');
+        if (pageControls) {
+            pageControls.style.opacity = '0.5';
+            pageControls.style.pointerEvents = 'none';
+        }
     } catch (error) {
         handleError(error, '初始化');
     }
