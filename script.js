@@ -36,23 +36,28 @@ class MusicController {
         this.isPlaying = false;
         this.volume = 0.3;
         this.fadeTime = 1000; // 淡入淡出时间
+        this.musicStates = {}; // 记录每首音乐的播放状态
     }
     
-    play(musicId) {
-        if (this.currentMusic && this.currentMusic.id === musicId) {
+    play(musicId, continueFromPrevious = false) {
+        const music = document.getElementById(musicId);
+        if (!music) return;
+        
+        // 如果继续播放同一首音乐且已经在播放，不重复播放
+        if (continueFromPrevious && this.currentMusic && this.currentMusic.id === musicId && this.isPlaying) {
             return;
         }
         
-        this.stop();
-        
-        const music = document.getElementById(musicId);
-        if (music) {
-            this.currentMusic = music;
-            music.volume = 0;
-            music.play().catch(e => console.log('音乐播放失败:', e));
-            this.fadeIn();
-            this.isPlaying = true;
+        // 如果切换音乐，先停止当前音乐
+        if (!continueFromPrevious) {
+            this.stop();
         }
+        
+        this.currentMusic = music;
+        music.volume = 0;
+        music.play().catch(e => console.log('音乐播放失败:', e));
+        this.fadeIn();
+        this.isPlaying = true;
     }
     
     stop() {
@@ -181,6 +186,7 @@ function handleChapterChange(chapterIndex) {
             animateChapter1();
             break;
         case 2: // 第二章
+            musicController.play('bg-music', true); // 继续播放第一章的音乐
             animateChapter2();
             break;
         case 3: // 第三章
@@ -188,6 +194,7 @@ function handleChapterChange(chapterIndex) {
             animateChapter3();
             break;
         case 4: // 第四章
+            musicController.play('left-person-music', true); // 继续播放第三章的音乐
             animateChapter4();
             break;
         case 5: // 第五章
@@ -195,6 +202,7 @@ function handleChapterChange(chapterIndex) {
             animateChapter5();
             break;
         case 6: // 第六章
+            musicController.play('lie-music', true); // 继续播放第五章的音乐
             animateChapter6();
             break;
     }
@@ -335,24 +343,54 @@ function animateChapter4() {
 function animateChapter5() {
     const voiceAudio = document.getElementById('voice-audio');
     const voiceText = document.querySelector('.voice-text');
+    const sequencePhotos = document.querySelectorAll('.sequence-photo');
     
-    if (voiceAudio && voiceText) {
-        // 暂停音乐播放语音
-        musicController.pause();
-        voiceAudio.play();
-        
-        // 显示字幕
-        const textLines = voiceText.querySelectorAll('p');
-        textLines.forEach((line, index) => {
-            setTimeout(() => {
-                line.classList.add('visible');
-            }, index * 1000);
-        });
-        
-        voiceAudio.addEventListener('ended', () => {
-            musicController.resume();
-        });
-    }
+    // 照片序列动画
+    let currentPhotoIndex = 0;
+    const showNextPhoto = () => {
+        if (currentPhotoIndex < sequencePhotos.length) {
+            // 隐藏当前照片
+            sequencePhotos.forEach(photo => photo.classList.remove('active'));
+            
+            // 显示下一张照片
+            sequencePhotos[currentPhotoIndex].classList.add('active');
+            currentPhotoIndex++;
+            
+            // 3秒后显示下一张照片
+            if (currentPhotoIndex < sequencePhotos.length) {
+                setTimeout(showNextPhoto, 3000);
+            } else {
+                // 所有照片显示完毕，开始播放语音
+                setTimeout(() => {
+                    playVoice();
+                }, 2000);
+            }
+        }
+    };
+    
+    // 播放语音
+    const playVoice = () => {
+        if (voiceAudio && voiceText) {
+            // 暂停音乐播放语音
+            musicController.pause();
+            voiceAudio.play();
+            
+            // 显示字幕
+            const textLines = voiceText.querySelectorAll('p');
+            textLines.forEach((line, index) => {
+                setTimeout(() => {
+                    line.classList.add('visible');
+                }, index * 2000); // 每2秒显示一行
+            });
+            
+            voiceAudio.addEventListener('ended', () => {
+                musicController.resume();
+            });
+        }
+    };
+    
+    // 开始照片序列
+    setTimeout(showNextPhoto, 1000);
 }
 
 // 第六章动画
@@ -447,7 +485,14 @@ function preloadMedia() {
         'images/travel2.jpg',
         'images/travel3.jpg',
         'images/travel4.jpg',
-        'images/final.jpg',
+        'images/memory1.jpg',
+        'images/memory2.jpg',
+        'images/memory3.jpg',
+        'images/memory4.jpg',
+        'images/memory5.jpg',
+        'images/memory6.jpg',
+        'images/memory7.jpg',
+        'images/memory8.jpg',
         'videos/smile.mp4',
         'videos/travel1.mp4',
         'videos/travel2.mp4',
