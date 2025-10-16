@@ -125,6 +125,13 @@ class MusicController {
             }
         }, stepTime);
     }
+    
+    setVolume(volume) {
+        this.volume = Math.max(0, Math.min(1, volume));
+        if (this.currentMusic) {
+            this.currentMusic.volume = this.volume;
+        }
+    }
 }
 
 const musicController = new MusicController();
@@ -353,20 +360,156 @@ function animateChapter2() {
                 }, groupIndex * 1000);
             });
         });
+        
+        // 添加第二章特殊特效
+        addChapter2Effects();
     }, 1000);
+}
+
+// 第二章特殊特效
+function addChapter2Effects() {
+    // 第1组：居住照片 - 温馨光晕
+    const group1 = document.querySelector('.group-1');
+    if (group1) {
+        const items = group1.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('living-glow');
+            }, index * 500);
+        });
+    }
+    
+    // 第2组：食物照片 - 弹跳效果
+    const group2 = document.querySelector('.group-2');
+    if (group2) {
+        const items = group2.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('food-bounce');
+            }, index * 300);
+        });
+    }
+    
+    // 第3组：工作照片 - 脉冲效果
+    const group3 = document.querySelector('.group-3');
+    if (group3) {
+        const items = group3.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('work-pulse');
+            }, index * 400);
+        });
+    }
+    
+    // 第5组：心疼照片 - 心碎效果
+    const group5 = document.querySelector('.group-5');
+    if (group5) {
+        const items = group5.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('heartbreak');
+            }, index * 600);
+        });
+    }
+    
+    // 第6组：咬痕照片 - 震动效果
+    const group6 = document.querySelector('.group-6');
+    if (group6) {
+        const items = group6.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('bite-shake');
+            }, index * 200);
+        });
+    }
+    
+    // 第7组：偷拍照片 - 偷偷发光
+    const group7 = document.querySelector('.group-7');
+    if (group7) {
+        const items = group7.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('sneak-glow');
+            }, index * 800);
+        });
+    }
+    
+    // 第9组：担心照片 - 担心脉冲
+    const group9 = document.querySelector('.group-9');
+    if (group9) {
+        const items = group9.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('worry-pulse');
+            }, index * 700);
+        });
+    }
+    
+    // 第12组：礼物照片 - 礼物发光
+    const group12 = document.querySelector('.group-12');
+    if (group12) {
+        const items = group12.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('gift-glow');
+            }, index * 500);
+        });
+    }
+    
+    // 第13组：tart照片 - 伤心效果
+    const group13 = document.querySelector('.group-13');
+    if (group13) {
+        const items = group13.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('tart-sadness');
+            }, index * 900);
+        });
+    }
+    
+    // 第14组：酒照片 - 酒光效果
+    const group14 = document.querySelector('.group-14');
+    if (group14) {
+        const items = group14.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('wine-glow');
+            }, index * 400);
+        });
+    }
+    
+    // 第15组：感谢照片 - 感谢特效
+    const group15 = document.querySelector('.group-15');
+    if (group15) {
+        const items = group15.querySelectorAll('.photo-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.classList.add('thanks');
+            }, index * 600);
+        });
+    }
 }
 
 // 第三章动画
 function animateChapter3() {
     const travelPhotos = document.querySelectorAll('.travel-photo');
     const travelVideos = document.querySelectorAll('.travel-video');
+    const photoBatches = document.querySelectorAll('.photo-batch .photo-item');
     
     // 照片动画
     travelPhotos.forEach((photo, index) => {
         setTimeout(() => {
             photo.style.opacity = '1';
             photo.style.transform = 'translateY(0)';
+            photo.classList.add('travel-glow');
         }, index * 300);
+    });
+    
+    // 照片批次动画
+    photoBatches.forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.add('batch-float');
+        }, index * 200);
     });
     
     // 视频播放
@@ -375,6 +518,7 @@ function animateChapter3() {
         if (currentVideoIndex < travelVideos.length) {
             const video = travelVideos[currentVideoIndex];
             video.classList.add('active');
+            video.classList.add('video-pulse');
             video.play();
             
             video.addEventListener('ended', () => {
@@ -387,6 +531,76 @@ function animateChapter3() {
     
     // 延迟开始播放视频
     setTimeout(playNextVideo, 2000);
+    
+    // 添加第三章特殊特效
+    addChapter3Effects();
+}
+
+// 第三章特殊特效
+function addChapter3Effects() {
+    // 海边厕所照片 - 忧郁效果
+    const beachToilet = document.querySelector('img[alt="海边厕所"]');
+    if (beachToilet) {
+        setTimeout(() => {
+            beachToilet.classList.add('worry-pulse');
+        }, 1000);
+    }
+    
+    // 回家乡照片 - 温馨效果
+    const hometownPhotos = document.querySelectorAll('img[alt*="回家乡"]');
+    hometownPhotos.forEach((photo, index) => {
+        setTimeout(() => {
+            photo.classList.add('living-glow');
+        }, 1500 + index * 500);
+    });
+    
+    // 手表借用照片 - 运动效果
+    const watchPhoto = document.querySelector('img[alt="手表借用"]');
+    if (watchPhoto) {
+        setTimeout(() => {
+            watchPhoto.classList.add('food-bounce');
+        }, 2000);
+    }
+    
+    // 节日排队照片 - 耐心效果
+    const festivalPhotos = document.querySelectorAll('img[alt*="节日"]');
+    festivalPhotos.forEach((photo, index) => {
+        setTimeout(() => {
+            photo.classList.add('tart-sadness');
+        }, 2500 + index * 300);
+    });
+    
+    // 朋友礼物照片 - 用心效果
+    const friendGiftPhotos = document.querySelectorAll('img[alt*="朋友礼物"]');
+    friendGiftPhotos.forEach((photo, index) => {
+        setTimeout(() => {
+            photo.classList.add('gift-glow');
+        }, 3000 + index * 400);
+    });
+    
+    // 海鲜餐厅照片 - 幸福效果
+    const seafoodPhoto = document.querySelector('img[alt="海鲜餐厅"]');
+    if (seafoodPhoto) {
+        setTimeout(() => {
+            seafoodPhoto.classList.add('wine-glow');
+        }, 3500);
+    }
+    
+    // 海底捞照片 - 开心效果
+    const haidilaoPhotos = document.querySelectorAll('img[alt*="海底捞"]');
+    haidilaoPhotos.forEach((photo, index) => {
+        setTimeout(() => {
+            photo.classList.add('food-bounce');
+        }, 4000 + index * 200);
+    });
+    
+    // 日出照片 - 希望效果
+    const sunrisePhotos = document.querySelectorAll('img[alt*="日出"]');
+    sunrisePhotos.forEach((photo, index) => {
+        setTimeout(() => {
+            photo.classList.add('thanks');
+        }, 4500 + index * 500);
+    });
 }
 
 // 第四章动画
@@ -485,6 +699,9 @@ function animateChapter5() {
         if (voiceAudio && voiceText) {
             // 暂停音乐播放语音
             musicController.pause();
+            
+            // 设置语音音量最大，确保不被背景音乐盖过
+            voiceAudio.volume = 1.0;
             voiceAudio.play();
             
             // 显示字幕
@@ -496,7 +713,14 @@ function animateChapter5() {
             });
             
             voiceAudio.addEventListener('ended', () => {
+                // 语音结束后，降低背景音乐音量再恢复
+                musicController.setVolume(0.3);
                 musicController.resume();
+                
+                // 5秒后恢复正常音量
+                setTimeout(() => {
+                    musicController.setVolume(1.0);
+                }, 5000);
             });
         }
     };

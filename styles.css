@@ -1546,6 +1546,232 @@ body {
     }
 }
 
+/* 第二章特殊特效 */
+.group-1 .photo-item {
+    animation: livingGlow 3s ease-in-out infinite;
+}
+
+@keyframes livingGlow {
+    0%, 100% {
+        filter: brightness(1) contrast(1);
+        box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+    }
+    50% {
+        filter: brightness(1.1) contrast(1.1);
+        box-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
+    }
+}
+
+.group-2 .photo-item {
+    animation: foodBounce 2s ease-in-out infinite;
+}
+
+@keyframes foodBounce {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.group-3 .photo-item {
+    animation: workPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes workPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(1.02);
+        filter: brightness(1.05);
+    }
+}
+
+.group-4 .photo-item {
+    animation: bedokFloat 3s ease-in-out infinite;
+}
+
+@keyframes bedokFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-3px) rotate(1deg);
+    }
+}
+
+.group-5 .photo-item {
+    animation: heartbreak 3s ease-in-out infinite;
+}
+
+.group-6 .photo-item {
+    animation: biteShake 1.5s ease-in-out infinite;
+}
+
+@keyframes biteShake {
+    0%, 100% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateX(-2px);
+    }
+    75% {
+        transform: translateX(2px);
+    }
+}
+
+.group-7 .photo-item {
+    animation: sneakGlow 2s ease-in-out infinite;
+}
+
+@keyframes sneakGlow {
+    0%, 100% {
+        filter: brightness(1) saturate(1);
+        box-shadow: 0 0 5px rgba(255, 255, 0, 0.3);
+    }
+    50% {
+        filter: brightness(1.1) saturate(1.2);
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+    }
+}
+
+.group-9 .photo-item {
+    animation: worryPulse 2s ease-in-out infinite;
+}
+
+@keyframes worryPulse {
+    0%, 100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(1.03);
+        filter: brightness(1.1);
+    }
+}
+
+.group-10 .photo-item {
+    animation: bedSheetFloat 3s ease-in-out infinite;
+}
+
+@keyframes bedSheetFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-4px) rotate(0.5deg);
+    }
+}
+
+.group-11 .photo-item {
+    animation: drinkBubble 2.5s ease-in-out infinite;
+}
+
+@keyframes drinkBubble {
+    0%, 100% {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+    50% {
+        transform: scale(1.02);
+        filter: brightness(1.08);
+    }
+}
+
+.group-12 .photo-item {
+    animation: giftGlow 3s ease-in-out infinite;
+}
+
+@keyframes giftGlow {
+    0%, 100% {
+        filter: brightness(1) saturate(1);
+        box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        filter: brightness(1.15) saturate(1.3);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+}
+
+.group-13 .photo-item {
+    animation: tartSadness 4s ease-in-out infinite;
+}
+
+@keyframes tartSadness {
+    0%, 100% {
+        filter: brightness(1) contrast(1);
+    }
+    50% {
+        filter: brightness(0.9) contrast(1.1) sepia(0.2);
+    }
+}
+
+.group-14 .photo-item {
+    animation: wineGlow 3s ease-in-out infinite;
+}
+
+@keyframes wineGlow {
+    0%, 100% {
+        filter: brightness(1) saturate(1);
+        box-shadow: 0 0 10px rgba(139, 69, 19, 0.3);
+    }
+    50% {
+        filter: brightness(1.1) saturate(1.2);
+        box-shadow: 0 0 20px rgba(139, 69, 19, 0.6);
+    }
+}
+
+.group-16 .photo-item {
+    animation: chatFlow 1s ease-in-out infinite;
+}
+
+/* 第三章旅行特效 */
+.travel-photo {
+    animation: travelGlow 3s ease-in-out infinite;
+}
+
+@keyframes travelGlow {
+    0%, 100% {
+        filter: brightness(1) contrast(1);
+        box-shadow: 0 0 15px rgba(135, 206, 235, 0.4);
+    }
+    50% {
+        filter: brightness(1.1) contrast(1.1);
+        box-shadow: 0 0 25px rgba(135, 206, 235, 0.7);
+    }
+}
+
+.travel-video {
+    animation: videoPulse 2s ease-in-out infinite;
+}
+
+@keyframes videoPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        transform: scale(1.01);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    }
+}
+
+.photo-batch .photo-item {
+    animation: batchFloat 3s ease-in-out infinite;
+}
+
+@keyframes batchFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
 /* 第四章：那些笑容 - 特殊特效样式 */
 .smile-pages {
     margin: 60px 0;
