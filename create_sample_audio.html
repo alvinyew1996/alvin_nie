@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>生成示例音频</title>
+</head>
+<body>
+    <h1>音频文件生成器</h1>
+    <p>由于无法直接生成音频文件，请手动准备以下音频文件：</p>
+    <ul>
+        <li><strong>rain-love.mp3</strong> - 雨爱 (杨丞琳) - 用于第一章和第二章</li>
+        <li><strong>left-person.mp3</strong> - 左边的人 (陈华) - 用于第三章和第四章</li>
+        <li><strong>lie.mp3</strong> - 骗 (张碧晨) - 用于第五章和第六章</li>
+        <li><strong>voice.mp3</strong> - 语音片段 (约40秒) - 用于第五章</li>
+    </ul>
+    
+    <h2>图片文件清单：</h2>
+    <ul>
+        <li><strong>meeting1.jpg 到 meeting3.jpg</strong> - 初遇照片 (3张，支持翻页)</li>
+        <li><strong>together1.jpg 到 together15.jpg</strong> - 相处时光照片 (15张)</li>
+        <li><strong>travel1.jpg 到 travel4.jpg</strong> - 旅行照片 (4张)</li>
+        <li><strong>memory1.jpg 到 memory8.jpg</strong> - 回忆照片 (8张，用于第五章)</li>
+        <li><strong>final.jpg</strong> - 最后笑容照片</li>
+    </ul>
+    
+    <h2>视频文件清单：</h2>
+    <ul>
+        <li><strong>smile.mp4</strong> - 笑容视频 (15秒循环) - 用于第四章</li>
+        <li><strong>travel1.mp4</strong> - 旅行视频 1 - 用于第三章</li>
+        <li><strong>travel2.mp4</strong> - 旅行视频 2 - 用于第三章</li>
+        <li><strong>travel3.mp4</strong> - 旅行视频 3 - 用于第三章</li>
+    </ul>
+    
+    <p>将以上文件放入对应的文件夹中：</p>
+    <ul>
+        <li>音频文件 → <code>audio/</code> 文件夹</li>
+        <li>图片文件 → <code>images/</code> 文件夹</li>
+        <li>视频文件 → <code>videos/</code> 文件夹</li>
+    </ul>
+    
+    <script>
+        // 创建示例占位图片
+        function createPlaceholderImage(text, filename) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 600;
+            canvas.height = 400;
+            const ctx = canvas.getContext('2d');
+            
+            // 背景渐变
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#f5f1e8');
+            gradient.addColorStop(1, '#e8ddd4');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 添加文字
+            ctx.fillStyle = '#8b4513';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(text, canvas.width/2, canvas.height/2);
+            
+            // 下载图片
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // 生成所有占位图片
+        const images = [
+            {text: '初遇 1', file: 'meeting1.jpg'},
+            {text: '初遇 2', file: 'meeting2.jpg'},
+            {text: '初遇 3', file: 'meeting3.jpg'},
+            {text: '相处时光 1', file: 'together1.jpg'},
+            {text: '相处时光 2', file: 'together2.jpg'},
+            {text: '相处时光 3', file: 'together3.jpg'},
+            {text: '相处时光 4', file: 'together4.jpg'},
+            {text: '相处时光 5', file: 'together5.jpg'},
+            {text: '相处时光 6', file: 'together6.jpg'},
+            {text: '相处时光 7', file: 'together7.jpg'},
+            {text: '相处时光 8', file: 'together8.jpg'},
+            {text: '相处时光 9', file: 'together9.jpg'},
+            {text: '相处时光 10', file: 'together10.jpg'},
+            {text: '相处时光 11', file: 'together11.jpg'},
+            {text: '相处时光 12', file: 'together12.jpg'},
+            {text: '相处时光 13', file: 'together13.jpg'},
+            {text: '相处时光 14', file: 'together14.jpg'},
+            {text: '相处时光 15', file: 'together15.jpg'},
+            {text: '旅行 1', file: 'travel1.jpg'},
+            {text: '旅行 2', file: 'travel2.jpg'},
+            {text: '旅行 3', file: 'travel3.jpg'},
+            {text: '旅行 4', file: 'travel4.jpg'},
+            {text: '回忆 1', file: 'memory1.jpg'},
+            {text: '回忆 2', file: 'memory2.jpg'},
+            {text: '回忆 3', file: 'memory3.jpg'},
+            {text: '回忆 4', file: 'memory4.jpg'},
+            {text: '回忆 5', file: 'memory5.jpg'},
+            {text: '回忆 6', file: 'memory6.jpg'},
+            {text: '回忆 7', file: 'memory7.jpg'},
+            {text: '回忆 8', file: 'memory8.jpg'},
+            {text: '最后笑容', file: 'final.jpg'}
+        ];
+        
+        let index = 0;
+        function generateNext() {
+            if (index < images.length) {
+                createPlaceholderImage(images[index].text, images[index].file);
+                index++;
+                setTimeout(generateNext, 500);
+            }
+        }
+        
+        // 点击按钮开始生成
+        document.body.innerHTML += '<button onclick="generateNext()" style="margin: 20px; padding: 10px 20px; font-size: 16px;">生成占位图片</button>';
+    </script>
+</body>
+</html>
