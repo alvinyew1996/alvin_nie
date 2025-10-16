@@ -391,15 +391,63 @@ function animateChapter3() {
 
 // 第四章动画
 function animateChapter4() {
-    const video = document.getElementById('smile-video');
-    if (video) {
-        // 暂停音乐播放视频
-        musicController.pause();
-        video.play();
+    // 第一页：特殊照片特效
+    const specialPhoto = document.querySelector('.special-smile-photo');
+    const sparkles = document.querySelectorAll('.sparkle');
+    
+    if (specialPhoto) {
+        // 照片出现动画
+        specialPhoto.style.opacity = '0';
+        specialPhoto.style.transform = 'scale(0.8)';
         
-        video.addEventListener('ended', () => {
+        setTimeout(() => {
+            specialPhoto.style.transition = 'all 2s ease-out';
+            specialPhoto.style.opacity = '1';
+            specialPhoto.style.transform = 'scale(1)';
+            
+            // 启动闪烁特效
+            sparkles.forEach((sparkle, index) => {
+                setTimeout(() => {
+                    sparkle.style.animation = 'sparkleFloat 2s ease-in-out infinite';
+                }, index * 200);
+            });
+        }, 500);
+    }
+    
+    // 第二页：重要视频特效
+    const importantVideo = document.getElementById('important-video');
+    const rainbows = document.querySelectorAll('.rainbow');
+    const bubbles = document.querySelectorAll('.bubble');
+    
+    if (importantVideo) {
+        // 启动彩虹和泡泡特效
+        rainbows.forEach((rainbow, index) => {
+            setTimeout(() => {
+                rainbow.style.animation = 'rainbowFloat 4s ease-in-out infinite';
+            }, index * 500);
+        });
+        
+        bubbles.forEach((bubble, index) => {
+            setTimeout(() => {
+                bubble.style.animation = 'bubbleFloat 6s ease-in-out infinite';
+            }, index * 300);
+        });
+        
+        // 视频播放时暂停背景音乐
+        importantVideo.addEventListener('play', () => {
+            musicController.pause();
+        });
+        
+        importantVideo.addEventListener('ended', () => {
             musicController.resume();
         });
+        
+        // 自动播放视频
+        setTimeout(() => {
+            importantVideo.play().catch(e => {
+                console.log('视频自动播放失败，需要用户交互');
+            });
+        }, 2000);
     }
 }
 
