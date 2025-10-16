@@ -112,29 +112,27 @@
     <script>
         const requiredPhotos = {
             "封面": ["moon-clover.jpg"],
-            "第一章：初遇": ["meeting1.jpg", "meeting2.jpg", "meeting3.jpg", "meeting4.jpg"],
-            "第二章：居住照片": Array.from({length: 20}, (_, i) => `living${i+1}.jpg`),
-            "第二章：食物照片": [
-                "loklok.jpg", "work1.jpg", "work2.jpg", "work3.jpg", "work4.jpg",
+            "第一章：初遇 (4个页面)": ["meeting1.jpg", "meeting2.jpg", "meeting3.jpg", "meeting4.jpg"],
+            "第二章：居住照片 (4页)": Array.from({length: 20}, (_, i) => `living${i+1}.jpg`),
+            "第二章：Lok Lok店 (1页)": ["loklok.jpg"],
+            "第二章：工作陪伴 (4页)": [
+                "work1.jpg", "work2.jpg", "work3.jpg", "work4.jpg",
                 "supper1.jpg", "supper2.jpg", "mcd1.jpg", "mcd2.jpg",
                 "korean1.jpg", "korean2.jpg", "cooked1.jpg", "cooked2.jpg",
-                "cake.jpg", "japanese.jpg", "fruit.jpg", "food4.jpg",
-                "bedok1.jpg", "bedok2.jpg", "tart.jpg", "abang1.jpg", "abang2.jpg", "wine.jpg"
+                "cake.jpg", "japanese.jpg", "fruit.jpg", "food4.jpg"
             ],
-            "第二章：情感照片": [
-                "heartbreak1.jpg", "heartbreak2.jpg", "heartbreak3.jpg",
+            "第二章：其他照片 (14页)": [
+                "bedok1.jpg", "bedok2.jpg", "heartbreak1.jpg", "heartbreak2.jpg", "heartbreak3.jpg",
                 "bite.jpg", "sneak.jpg", "funny1.jpg", "funny2.jpg", "lost.jpg",
+                "bedsheet1.jpg", "bedsheet2.jpg", "bedsheet3.jpg", "drink1.jpg", "drink2.jpg", "drink3.jpg",
+                "gift.jpg", "tart.jpg", "abang1.jpg", "abang2.jpg", "wine.jpg",
                 "thanks1.jpg", "thanks2.jpg", "thanks3.jpg"
             ],
-            "第二章：生活照片": [
-                "bedsheet1.jpg", "bedsheet2.jpg", "bedsheet3.jpg",
-                "drink1.jpg", "drink2.jpg", "drink3.jpg", "gift.jpg"
-            ],
-            "第二章：聊天记录": Array.from({length: 21}, (_, i) => `chat${i+1}.jpg`),
-            "第三章：旅行": ["travel1.jpg", "travel2.jpg", "travel3.jpg", "travel4.jpg"],
-            "第四章：笑容": ["special-smile.jpg"],
-            "第五章：回忆": Array.from({length: 8}, (_, i) => `memory${i+1}.jpg`),
-            "第六章：结尾": ["final-pattern.jpg"]
+            "第二章：聊天记录 (3页)": Array.from({length: 21}, (_, i) => `chat${i+1}.jpg`),
+            "第三章：旅行 (19页)": ["travel1.jpg", "travel2.jpg", "travel3.jpg", "travel4.jpg"],
+            "第四章：笑容 (2页)": ["special-smile.jpg"],
+            "第五章：回忆 (12页)": Array.from({length: 20}, (_, i) => `memory${i+1}.jpg`),
+            "第六章：结尾 (1页)": ["final-pattern.jpg"]
         };
 
         function checkPhotos() {
