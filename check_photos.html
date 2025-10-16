@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>照片检查工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #8b4513;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .section h3 {
+            color: #5a4a3a;
+            margin-top: 0;
+        }
+        .photo-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .photo-item {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+        .photo-item img {
+            max-width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+        .photo-item .name {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status.missing {
+            background: #ffebee;
+            color: #c62828;
+        }
+        .status.found {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+        .summary {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .summary h3 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+        .check-btn {
+            background: #8b4513;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+        }
+        .check-btn:hover {
+            background: #a0522d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 照片检查工具</h1>
+        
+        <div class="summary">
+            <h3>检查说明</h3>
+            <p>这个工具会检查您的照片是否正确放置在 <code>images/</code> 文件夹中，并显示照片预览。</p>
+            <button class="check-btn" onclick="checkPhotos()">开始检查照片</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const requiredPhotos = {
+            "封面": ["moon-clover.jpg"],
+            "第一章：初遇 (4个页面)": ["meeting1.jpg", "meeting2.jpg", "meeting3.jpg", "meeting4.jpg"],
+            "第二章：居住照片 (4页)": Array.from({length: 20}, (_, i) => `living${i+1}.jpg`),
+            "第二章：Lok Lok店 (1页)": ["loklok.jpg"],
+            "第二章：工作陪伴 (4页)": [
+                "work1.jpg", "work2.jpg", "work3.jpg", "work4.jpg",
+                "supper1.jpg", "supper2.jpg", "mcd1.jpg", "mcd2.jpg",
+                "korean1.jpg", "korean2.jpg", "cooked1.jpg", "cooked2.jpg",
+                "cake.jpg", "japanese.jpg", "fruit.jpg", "food4.jpg"
+            ],
+            "第二章：其他照片 (14页)": [
+                "bedok1.jpg", "bedok2.jpg", "heartbreak1.jpg", "heartbreak2.jpg", "heartbreak3.jpg",
+                "bite.jpg", "sneak.jpg", "funny1.jpg", "funny2.jpg", "lost.jpg",
+                "bedsheet1.jpg", "bedsheet2.jpg", "bedsheet3.jpg", "drink1.jpg", "drink2.jpg", "drink3.jpg",
+                "gift.jpg", "tart.jpg", "abang1.jpg", "abang2.jpg", "wine.jpg",
+                "thanks1.jpg", "thanks2.jpg", "thanks3.jpg"
+            ],
+            "第二章：聊天记录 (3页)": Array.from({length: 21}, (_, i) => `chat${i+1}.jpg`),
+            "第三章：旅行 (19页)": ["travel1.jpg", "travel2.jpg", "travel3.jpg", "travel4.jpg"],
+            "第四章：笑容 (2页)": ["special-smile.jpg"],
+            "第五章：回忆 (12页)": Array.from({length: 20}, (_, i) => `memory${i+1}.jpg`),
+            "第六章：结尾 (1页)": ["final-pattern.jpg"]
+        };
+
+        function checkPhotos() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<h2>检查结果</h2>';
+            
+            let totalPhotos = 0;
+            let foundPhotos = 0;
+            
+            for (const [sectionName, photos] of Object.entries(requiredPhotos)) {
+                const sectionDiv = document.createElement('div');
+                sectionDiv.className = 'section';
+                
+                const sectionTitle = document.createElement('h3');
+                sectionTitle.textContent = sectionName;
+                sectionDiv.appendChild(sectionTitle);
+                
+                const photoListDiv = document.createElement('div');
+                photoListDiv.className = 'photo-list';
+                
+                let sectionFound = 0;
+                
+                photos.forEach(photoName => {
+                    totalPhotos++;
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = `images/${photoName}`;
+                    img.alt = photoName;
+                    img.onerror = function() {
+                        this.style.display = 'none';
+                        const status = document.createElement('div');
+                        status.className = 'status missing';
+                        status.textContent = '❌ 缺失';
+                        photoItem.appendChild(status);
+                    };
+                    img.onload = function() {
+                        sectionFound++;
+                        foundPhotos++;
+                        const status = document.createElement('div');
+                        status.className = 'status found';
+                        status.textContent = '✅ 找到';
+                        photoItem.appendChild(status);
+                    };
+                    
+                    photoItem.appendChild(img);
+                    
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'name';
+                    nameDiv.textContent = photoName;
+                    photoItem.appendChild(nameDiv);
+                    
+                    photoListDiv.appendChild(photoItem);
+                });
+                
+                sectionDiv.appendChild(photoListDiv);
+                
+                const sectionStatus = document.createElement('div');
+                sectionStatus.innerHTML = `<strong>找到: ${sectionFound}/${photos.length} 张照片</strong>`;
+                sectionDiv.appendChild(sectionStatus);
+                
+                resultsDiv.appendChild(sectionDiv);
+            }
+            
+            // 添加总结
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'summary';
+            summaryDiv.innerHTML = `
+                <h3>检查总结</h3>
+                <p><strong>总计: ${foundPhotos}/${totalPhotos} 张照片已找到</p>
+                <p>完成度: ${Math.round((foundPhotos/totalPhotos)*100)}%</p>
+                ${foundPhotos === totalPhotos ? 
+                    '<p style="color: green;">🎉 所有照片都已准备就绪！</p>' : 
+                    '<p style="color: orange;">⚠️ 还有部分照片需要添加</p>'
+                }
+            `;
+            resultsDiv.appendChild(summaryDiv);
+        }
+    </script>
+</body>
+</html>
