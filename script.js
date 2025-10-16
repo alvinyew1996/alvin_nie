@@ -136,6 +136,42 @@ class MusicController {
 
 const musicController = new MusicController();
 
+// 视频音量控制
+function setupVideoVolume() {
+    const allVideos = document.querySelectorAll('video');
+    allVideos.forEach(video => {
+        // 设置所有视频音量为最大
+        video.volume = 1.0;
+        
+        // 确保视频加载后音量最大
+        video.addEventListener('loadedmetadata', () => {
+            video.volume = 1.0;
+        });
+        
+        // 监听视频播放事件
+        video.addEventListener('play', () => {
+            // 视频播放时暂停背景音乐
+            musicController.pause();
+            // 再次确保音量最大
+            video.volume = 1.0;
+        });
+        
+        video.addEventListener('ended', () => {
+            // 视频结束后恢复背景音乐
+            musicController.resume();
+        });
+        
+        // 为静音视频添加特殊处理
+        if (video.muted) {
+            // 如果是静音视频，在播放时取消静音
+            video.addEventListener('play', () => {
+                video.muted = false;
+                video.volume = 1.0;
+            });
+        }
+    });
+}
+
 // 滚动监听
 function setupScrollListener() {
     const throttledUpdateOnScroll = throttle(() => {
@@ -519,6 +555,15 @@ function animateChapter3() {
             const video = travelVideos[currentVideoIndex];
             video.classList.add('active');
             video.classList.add('video-pulse');
+            
+            // 设置视频音量最大，确保声音清晰
+            video.volume = 1.0;
+            
+            // 确保视频声音足够大
+            video.addEventListener('loadedmetadata', () => {
+                video.volume = 1.0;
+            });
+            
             video.play();
             
             video.addEventListener('ended', () => {
@@ -647,13 +692,30 @@ function animateChapter4() {
             }, index * 300);
         });
         
+        // 设置视频音量最大，确保声音清晰
+        importantVideo.volume = 1.0;
+        
+        // 确保视频声音足够大
+        importantVideo.addEventListener('loadedmetadata', () => {
+            importantVideo.volume = 1.0;
+        });
+        
         // 视频播放时暂停背景音乐
         importantVideo.addEventListener('play', () => {
             musicController.pause();
+            // 再次确保音量最大
+            importantVideo.volume = 1.0;
         });
         
         importantVideo.addEventListener('ended', () => {
+            // 视频结束后，降低背景音乐音量再恢复
+            musicController.setVolume(0.3);
             musicController.resume();
+            
+            // 5秒后恢复正常音量
+            setTimeout(() => {
+                musicController.setVolume(1.0);
+            }, 5000);
         });
         
         // 自动播放视频
@@ -891,6 +953,7 @@ function init() {
         setupMusicControl();
         setupProgressIndicator();
         setupPageNavigation();
+        setupVideoVolume();
         preloadMedia();
         
         // 隐藏加载屏幕
