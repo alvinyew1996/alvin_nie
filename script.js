@@ -179,7 +179,8 @@ function handleChapterChange(chapterIndex) {
     
     switch(chapterIndex) {
         case 0: // 封面
-            // 封面不播放音乐
+            musicController.play('cover-music');
+            animateCover();
             break;
         case 1: // 第一章
             musicController.play('bg-music');
@@ -208,9 +209,30 @@ function handleChapterChange(chapterIndex) {
     }
 }
 
+// 封面动画
+function animateCover() {
+    // 15秒后开始翻页
+    setTimeout(() => {
+        const book = document.querySelector('.book');
+        if (book) {
+            book.style.animation = 'bookOpen 3s ease-in-out forwards';
+        }
+        
+        // 翻页完成后停止封面音乐，准备进入第一章
+        setTimeout(() => {
+            musicController.stop();
+            // 自动滚动到第一章
+            const chapter1 = document.querySelector('#chapter1');
+            if (chapter1) {
+                smoothScrollTo(chapter1);
+            }
+        }, 3000);
+    }, 15000);
+}
+
 // 第一章翻页功能
 let currentPage = 1;
-const totalPages = 3;
+const totalPages = 4;
 
 function setupPageNavigation() {
     const prevBtn = document.querySelector('.prev-page');
@@ -262,6 +284,25 @@ function updatePageDisplay() {
     }
 }
 
+// 封面动画
+function animateCover() {
+    // 15秒后开始翻页
+    setTimeout(() => {
+        const book = document.querySelector('.book');
+        if (book) {
+            book.style.animation = 'bookOpen 3s ease-in-out forwards';
+        }
+        
+        // 翻页完成后进入第一章
+        setTimeout(() => {
+            const chapter1 = document.querySelector('#chapter1');
+            if (chapter1) {
+                chapter1.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 3000);
+    }, 15000);
+}
+
 // 第一章动画
 function animateChapter1() {
     const photo = document.querySelector('.page-1 .fade-in-photo');
@@ -283,13 +324,36 @@ function animateChapter1() {
 
 // 第二章动画
 function animateChapter2() {
+    // 处理所有照片项
     const photoItems = document.querySelectorAll('.photo-item');
     photoItems.forEach((item, index) => {
-        const delay = parseInt(item.dataset.delay) || index * 5000;
+        const delay = parseInt(item.dataset.delay) || index * 2000;
         setTimeout(() => {
             item.classList.add('visible');
         }, delay);
     });
+
+    // 处理聊天记录的批次显示
+    const chatBatches = document.querySelectorAll('.chat-batch');
+    chatBatches.forEach((batch, index) => {
+        setTimeout(() => {
+            batch.classList.add('visible');
+        }, 118000 + (index * 15000)); // 每批次间隔15秒
+    });
+
+    // 处理特殊效果
+    setTimeout(() => {
+        // 为不同组添加特殊效果
+        const groups = document.querySelectorAll('.photo-group');
+        groups.forEach((group, groupIndex) => {
+            const items = group.querySelectorAll('.photo-item');
+            items.forEach((item, itemIndex) => {
+                setTimeout(() => {
+                    item.style.animationDelay = `${itemIndex * 0.1}s`;
+                }, groupIndex * 1000);
+            });
+        });
+    }, 1000);
 }
 
 // 第三章动画
@@ -463,40 +527,57 @@ function handleError(error, context) {
 // 预加载媒体文件
 function preloadMedia() {
     const mediaFiles = [
+        // 封面
+        'images/moon-clover.jpg',
+        
+        // 第一章
         'images/meeting1.jpg',
         'images/meeting2.jpg',
         'images/meeting3.jpg',
-        'images/together1.jpg',
-        'images/together2.jpg',
-        'images/together3.jpg',
-        'images/together4.jpg',
-        'images/together5.jpg',
-        'images/together6.jpg',
-        'images/together7.jpg',
-        'images/together8.jpg',
-        'images/together9.jpg',
-        'images/together10.jpg',
-        'images/together11.jpg',
-        'images/together12.jpg',
-        'images/together13.jpg',
-        'images/together14.jpg',
-        'images/together15.jpg',
-        'images/travel1.jpg',
-        'images/travel2.jpg',
-        'images/travel3.jpg',
-        'images/travel4.jpg',
-        'images/memory1.jpg',
-        'images/memory2.jpg',
-        'images/memory3.jpg',
-        'images/memory4.jpg',
-        'images/memory5.jpg',
-        'images/memory6.jpg',
-        'images/memory7.jpg',
-        'images/memory8.jpg',
+        'images/meeting4.jpg',
+        
+        // 第二章 - 居住照片
+        'images/living1.jpg', 'images/living2.jpg', 'images/living3.jpg', 'images/living4.jpg', 'images/living5.jpg',
+        'images/living6.jpg', 'images/living7.jpg', 'images/living8.jpg', 'images/living9.jpg', 'images/living10.jpg',
+        'images/living11.jpg', 'images/living12.jpg', 'images/living13.jpg', 'images/living14.jpg', 'images/living15.jpg',
+        'images/living16.jpg', 'images/living17.jpg', 'images/living18.jpg', 'images/living19.jpg', 'images/living20.jpg',
+        
+        // 第二章 - 其他照片
+        'images/loklok.jpg',
+        'images/work1.jpg', 'images/work2.jpg', 'images/work3.jpg', 'images/work4.jpg',
+        'images/supper1.jpg', 'images/supper2.jpg', 'images/mcd1.jpg', 'images/mcd2.jpg',
+        'images/korean1.jpg', 'images/korean2.jpg', 'images/cooked1.jpg', 'images/cooked2.jpg',
+        'images/cake.jpg', 'images/japanese.jpg', 'images/fruit.jpg', 'images/food4.jpg',
+        'images/bedok1.jpg', 'images/bedok2.jpg',
+        'images/heartbreak1.jpg', 'images/heartbreak2.jpg', 'images/heartbreak3.jpg',
+        'images/bite.jpg', 'images/sneak.jpg',
+        'images/funny1.jpg', 'images/funny2.jpg',
+        'images/lost.jpg',
+        'images/bedsheet1.jpg', 'images/bedsheet2.jpg', 'images/bedsheet3.jpg',
+        'images/drink1.jpg', 'images/drink2.jpg', 'images/drink3.jpg',
+        'images/gift.jpg',
+        'images/tart.jpg', 'images/abang1.jpg', 'images/abang2.jpg',
+        'images/wine.jpg',
+        'images/thanks1.jpg', 'images/thanks2.jpg', 'images/thanks3.jpg',
+        'images/chat1.jpg', 'images/chat2.jpg', 'images/chat3.jpg', 'images/chat4.jpg', 'images/chat5.jpg',
+        'images/chat6.jpg', 'images/chat7.jpg', 'images/chat8.jpg', 'images/chat9.jpg', 'images/chat10.jpg',
+        'images/chat11.jpg', 'images/chat12.jpg', 'images/chat13.jpg', 'images/chat14.jpg', 'images/chat15.jpg',
+        'images/chat16.jpg', 'images/chat17.jpg', 'images/chat18.jpg', 'images/chat19.jpg', 'images/chat20.jpg',
+        'images/chat21.jpg',
+        
+        // 第三章
+        'images/travel1.jpg', 'images/travel2.jpg', 'images/travel3.jpg', 'images/travel4.jpg',
+        
+        // 第五章
+        'images/memory1.jpg', 'images/memory2.jpg', 'images/memory3.jpg', 'images/memory4.jpg',
+        'images/memory5.jpg', 'images/memory6.jpg', 'images/memory7.jpg', 'images/memory8.jpg',
+        
+        // 视频文件
         'videos/smile.mp4',
-        'videos/travel1.mp4',
-        'videos/travel2.mp4',
-        'videos/travel3.mp4',
+        'videos/travel1.mp4', 'videos/travel2.mp4', 'videos/travel3.mp4',
+        
+        // 音频文件
+        'audio/ocean-view.mp3', // 宫崎骏音乐
         'audio/rain-love.mp3',
         'audio/left-person.mp3',
         'audio/lie.mp3',

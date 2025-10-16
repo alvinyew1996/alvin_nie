@@ -15,6 +15,17 @@
                 <div class="book-cover">
                     <h1 class="main-title">我们之间的故事</h1>
                     <p class="subtitle">——献给那个曾经让我笑、让我成长的人</p>
+                    <div class="moon-clover-image">
+                        <img src="images/moon-clover.jpg" alt="月亮和幸运草" class="moon-clover">
+                        <div class="stars-container">
+                            <div class="star star-1"></div>
+                            <div class="star star-2"></div>
+                            <div class="star star-3"></div>
+                            <div class="star star-4"></div>
+                            <div class="star star-5"></div>
+                            <div class="star star-6"></div>
+                        </div>
+                    </div>
                     <div class="second-visit-message" style="display: none;">
                         <p>希望你现在真的开心了。</p>
                     </div>
@@ -22,6 +33,9 @@
             </div>
         </div>
         <div class="particles"></div>
+        <div class="page-turning-indicator">
+            <p>15秒后开始翻页...</p>
+        </div>
     </section>
 
     <!-- 第一章：初遇 -->
@@ -34,7 +48,7 @@
                         <img src="images/meeting1.jpg" alt="初遇1" class="fade-in-photo">
                     </div>
                     <div class="page-text">
-                        <p>那天我怀着忐忑的心进入了自己不熟悉的领域和工作地点，但我却在那天遇见了你。</p>
+                        <p>那天我怀着忐忑的心进入了自己不熟悉的领域和工作地点，但我却在那天遇见了你，在这里的一切是我和你的开始。</p>
                     </div>
                 </div>
                 <div class="page page-2">
@@ -46,11 +60,23 @@
                     <div class="photo-container">
                         <img src="images/meeting3.jpg" alt="初遇3" class="fade-in-photo">
                     </div>
+                    <div class="page-text">
+                        <p>这是第一次单独约我出来去海边，愿意分享你的心事给我，那晚我心跳加速了</p>
+                    </div>
+                </div>
+                <div class="page page-4">
+                    <div class="photo-container">
+                        <img src="images/meeting4.jpg" alt="初遇4" class="fade-in-photo">
+                    </div>
+                    <div class="page-text">
+                        <p>在最初遇见的三四月里，你主动的把手搭到我肩膀上了，让我很是高兴又苦恼，高兴的是你愿意靠近我了，苦恼的是我不知道该不该亲近你还是保持距离</p>
+                        <div class="happiness-emoji">😊</div>
+                    </div>
                 </div>
             </div>
             <div class="page-controls">
                 <button class="prev-page" disabled>← 上一页</button>
-                <span class="page-indicator">1 / 3</span>
+                <span class="page-indicator">1 / 4</span>
                 <button class="next-page">下一页 →</button>
             </div>
         </div>
@@ -60,55 +86,395 @@
     <section id="chapter2" class="chapter">
         <div class="chapter-content">
             <h2 class="chapter-title">第二章：相处的日子</h2>
-            <div class="photo-collage">
-                <div class="photo-item" data-delay="0">
-                    <img src="images/together1.jpg" alt="相处时光1">
+            <p class="chapter-subtitle">其实最幸福的时光，是我们一起无所事事的时候，每时每刻都为你解决事情的时候，在分开以前从来没有食言，只对你一个人好。</p>
+            
+            <!-- 第一组：住过的地方 -->
+            <div class="photo-group group-1">
+                <h3 class="group-title">我们在一起住过的地方的日子里</h3>
+                <div class="photo-batch batch-1">
+                    <div class="photo-item" data-delay="0">
+                        <img src="images/living1.jpg" alt="居住1">
+                    </div>
+                    <div class="photo-item" data-delay="2000">
+                        <img src="images/living2.jpg" alt="居住2">
+                    </div>
+                    <div class="photo-item" data-delay="4000">
+                        <img src="images/living3.jpg" alt="居住3">
+                    </div>
+                    <div class="photo-item" data-delay="6000">
+                        <img src="images/living4.jpg" alt="居住4">
+                    </div>
+                    <div class="photo-item" data-delay="8000">
+                        <img src="images/living5.jpg" alt="居住5">
+                    </div>
                 </div>
-                <div class="photo-item" data-delay="5000">
-                    <img src="images/together2.jpg" alt="相处时光2">
+                <div class="photo-batch batch-2">
+                    <div class="photo-item" data-delay="10000">
+                        <img src="images/living6.jpg" alt="居住6">
+                    </div>
+                    <div class="photo-item" data-delay="12000">
+                        <img src="images/living7.jpg" alt="居住7">
+                    </div>
+                    <div class="photo-item" data-delay="14000">
+                        <img src="images/living8.jpg" alt="居住8">
+                    </div>
+                    <div class="photo-item" data-delay="16000">
+                        <img src="images/living9.jpg" alt="居住9">
+                    </div>
+                    <div class="photo-item" data-delay="18000">
+                        <img src="images/living10.jpg" alt="居住10">
+                    </div>
                 </div>
-                <div class="photo-item" data-delay="10000">
-                    <img src="images/together3.jpg" alt="相处时光3">
+                <div class="photo-batch batch-3">
+                    <div class="photo-item" data-delay="20000">
+                        <img src="images/living11.jpg" alt="居住11">
+                    </div>
+                    <div class="photo-item" data-delay="22000">
+                        <img src="images/living12.jpg" alt="居住12">
+                    </div>
+                    <div class="photo-item" data-delay="24000">
+                        <img src="images/living13.jpg" alt="居住13">
+                    </div>
+                    <div class="photo-item" data-delay="26000">
+                        <img src="images/living14.jpg" alt="居住14">
+                    </div>
+                    <div class="photo-item" data-delay="28000">
+                        <img src="images/living15.jpg" alt="居住15">
+                    </div>
                 </div>
-                <div class="photo-item" data-delay="15000">
-                    <img src="images/together4.jpg" alt="相处时光4">
-                </div>
-                <div class="photo-item" data-delay="20000">
-                    <img src="images/together5.jpg" alt="相处时光5">
-                </div>
-                <div class="photo-item" data-delay="25000">
-                    <img src="images/together6.jpg" alt="相处时光6">
-                </div>
-                <div class="photo-item" data-delay="30000">
-                    <img src="images/together7.jpg" alt="相处时光7">
-                </div>
-                <div class="photo-item" data-delay="35000">
-                    <img src="images/together8.jpg" alt="相处时光8">
-                </div>
-                <div class="photo-item" data-delay="40000">
-                    <img src="images/together9.jpg" alt="相处时光9">
-                </div>
-                <div class="photo-item" data-delay="45000">
-                    <img src="images/together10.jpg" alt="相处时光10">
-                </div>
-                <div class="photo-item" data-delay="50000">
-                    <img src="images/together11.jpg" alt="相处时光11">
-                </div>
-                <div class="photo-item" data-delay="55000">
-                    <img src="images/together12.jpg" alt="相处时光12">
-                </div>
-                <div class="photo-item" data-delay="60000">
-                    <img src="images/together13.jpg" alt="相处时光13">
-                </div>
-                <div class="photo-item" data-delay="65000">
-                    <img src="images/together14.jpg" alt="相处时光14">
-                </div>
-                <div class="photo-item" data-delay="70000">
-                    <img src="images/together15.jpg" alt="相处时光15">
+                <div class="photo-batch batch-4">
+                    <div class="photo-item" data-delay="30000">
+                        <img src="images/living16.jpg" alt="居住16">
+                    </div>
+                    <div class="photo-item" data-delay="32000">
+                        <img src="images/living17.jpg" alt="居住17">
+                        <div class="special-note">在这里开始有了想和你一起住的幻想</div>
+                    </div>
+                    <div class="photo-item" data-delay="34000">
+                        <img src="images/living18.jpg" alt="居住18">
+                    </div>
+                    <div class="photo-item" data-delay="36000">
+                        <img src="images/living19.jpg" alt="居住19">
+                    </div>
+                    <div class="photo-item" data-delay="38000">
+                        <img src="images/living20.jpg" alt="居住20">
+                    </div>
                 </div>
             </div>
-            <div class="chapter-text">
-                <p>其实最幸福的时光，是我们一起无所事事的时候，然后每时每刻都为你解决事情，在分开以前从来没有食言，只对你一个人好。</p>
+
+            <!-- 第二组：Lok Lok店 -->
+            <div class="photo-group group-2">
+                <div class="single-photo">
+                    <img src="images/loklok.jpg" alt="Lok Lok店">
+                    <p class="photo-caption">你最爱吃的Lok Lok店</p>
+                </div>
+            </div>
+
+            <!-- 第三组：工作时的陪伴 -->
+            <div class="photo-group group-3">
+                <h3 class="group-title">喜欢陪你吃东西也喜欢待在你身边看着你吃，真的一次都不想跟你错过</h3>
+                
+                <!-- 第一次呈现 -->
+                <div class="photo-batch batch-1">
+                    <div class="photo-item" data-delay="40000">
+                        <img src="images/work1.jpg" alt="工作1">
+                    </div>
+                    <div class="photo-item" data-delay="42000">
+                        <img src="images/work2.jpg" alt="工作2">
+                    </div>
+                    <div class="photo-item" data-delay="44000">
+                        <img src="images/work3.jpg" alt="工作3">
+                    </div>
+                    <div class="photo-item" data-delay="46000">
+                        <img src="images/work4.jpg" alt="工作4">
+                    </div>
+                    <div class="batch-caption">因为喜欢看你工作其实很常去你的店看你</div>
+                </div>
+
+                <!-- 第二次呈现 -->
+                <div class="photo-batch batch-2">
+                    <div class="photo-item" data-delay="50000">
+                        <img src="images/supper1.jpg" alt="宵夜1">
+                        <div class="photo-note">总是陪着你吃宵夜哪怕是半夜12点，我也一样出门陪着你吃好吃的酿豆腐</div>
+                    </div>
+                    <div class="photo-item" data-delay="52000">
+                        <img src="images/supper2.jpg" alt="宵夜2">
+                        <div class="photo-note">每次都会主动跟你提打包宵夜，经常等你回来陪你吃</div>
+                    </div>
+                    <div class="photo-item" data-delay="54000">
+                        <img src="images/mcd1.jpg" alt="麦当劳1">
+                        <div class="photo-note">每次打包mcd都可以打包一大堆食物，然后回家等你回来我们开开心心的一起吃</div>
+                    </div>
+                    <div class="photo-item" data-delay="56000">
+                        <img src="images/mcd2.jpg" alt="麦当劳2">
+                        <div class="photo-note">每次打包mcd都可以打包一大堆食物，然后回家等你回来我们开开心心的一起吃</div>
+                    </div>
+                </div>
+
+                <!-- 第三次呈现 -->
+                <div class="photo-batch batch-3">
+                    <div class="photo-item" data-delay="60000">
+                        <img src="images/korean1.jpg" alt="韩国餐1">
+                        <div class="photo-note">我为你找的韩国餐就是想跟你一起吃</div>
+                    </div>
+                    <div class="photo-item" data-delay="62000">
+                        <img src="images/korean2.jpg" alt="韩国餐2">
+                        <div class="photo-note">我为你找的韩国餐就是想跟你一起吃</div>
+                    </div>
+                    <div class="photo-item" data-delay="64000">
+                        <img src="images/cooked1.jpg" alt="炒煮1">
+                        <div class="photo-note">每次你也喜欢跟我一次吃多多的炒煮的食物，我知道都是你请客，我其实很愧疚噢</div>
+                    </div>
+                    <div class="photo-item" data-delay="66000">
+                        <img src="images/cooked2.jpg" alt="炒煮2">
+                        <div class="photo-note">每次你也喜欢跟我一次吃多多的炒煮的食物，我知道都是你请客，我其实很愧疚噢</div>
+                    </div>
+                </div>
+
+                <!-- 第四次呈现 -->
+                <div class="photo-batch batch-4">
+                    <div class="photo-item" data-delay="70000">
+                        <img src="images/cake.jpg" alt="蛋糕">
+                        <div class="photo-note">谢谢你让我吃那么好吃的蛋糕</div>
+                    </div>
+                    <div class="photo-item" data-delay="72000">
+                        <img src="images/japanese.jpg" alt="日本餐">
+                        <div class="photo-note">好吃的日本餐</div>
+                    </div>
+                    <div class="photo-item" data-delay="74000">
+                        <img src="images/fruit.jpg" alt="水果">
+                        <div class="photo-note">以前在bedok还经常买水果当饭后甜点</div>
+                    </div>
+                    <div class="photo-item" data-delay="76000">
+                        <img src="images/food4.jpg" alt="食物4">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第四组：Bedok遗漏东西 -->
+            <div class="photo-group group-4">
+                <div class="photo-batch">
+                    <div class="photo-item" data-delay="80000">
+                        <img src="images/bedok1.jpg" alt="Bedok1">
+                    </div>
+                    <div class="photo-item" data-delay="82000">
+                        <img src="images/bedok2.jpg" alt="Bedok2">
+                    </div>
+                </div>
+                <p class="photo-caption">在bedok，你总会遗漏东西在我的房间里</p>
+            </div>
+
+            <!-- 第五组：心疼的照片 -->
+            <div class="photo-group group-5">
+                <div class="photo-batch">
+                    <div class="photo-item" data-delay="84000">
+                        <img src="images/heartbreak1.jpg" alt="心疼1">
+                    </div>
+                    <div class="photo-item" data-delay="86000">
+                        <img src="images/heartbreak2.jpg" alt="心疼2">
+                    </div>
+                    <div class="photo-item" data-delay="88000">
+                        <img src="images/heartbreak3.jpg" alt="心疼3">
+                    </div>
+                </div>
+                <p class="photo-caption">总是发给我一些让我非常心疼你的照片</p>
+            </div>
+
+            <!-- 第六组：被咬的痕迹 -->
+            <div class="photo-group group-6">
+                <div class="single-photo">
+                    <img src="images/bite.jpg" alt="被咬">
+                    <div class="photo-note">被咬得可疼了，但是又很喜欢她咬我</div>
+                </div>
+                <p class="photo-caption">我喜欢的人咬我的痕迹</p>
+            </div>
+
+            <!-- 第七组：偷拍 -->
+            <div class="photo-group group-7">
+                <div class="single-photo">
+                    <img src="images/sneak.jpg" alt="偷拍">
+                </div>
+                <p class="photo-caption">我第一次鼓起勇气偷拍了你</p>
+            </div>
+
+            <!-- 第八组：搞怪照片 -->
+            <div class="photo-group group-8">
+                <div class="photo-batch">
+                    <div class="photo-item" data-delay="90000">
+                        <img src="images/funny1.jpg" alt="搞怪1">
+                    </div>
+                    <div class="photo-item" data-delay="92000">
+                        <img src="images/funny2.jpg" alt="搞怪2">
+                    </div>
+                </div>
+                <p class="photo-caption">总会发给你我搞怪的照片</p>
+            </div>
+
+            <!-- 第九组：担心迷路 -->
+            <div class="photo-group group-9">
+                <div class="single-photo">
+                    <img src="images/lost.jpg" alt="迷路">
+                </div>
+                <p class="photo-caption">无论什么时候都担心你迷路，哪怕自己在工作</p>
+            </div>
+
+            <!-- 第十组：床单 -->
+            <div class="photo-group group-10">
+                <div class="photo-batch">
+                    <div class="photo-item" data-delay="94000">
+                        <img src="images/bedsheet1.jpg" alt="床单1">
+                    </div>
+                    <div class="photo-item" data-delay="96000">
+                        <img src="images/bedsheet2.jpg" alt="床单2">
+                    </div>
+                    <div class="photo-item" data-delay="98000">
+                        <img src="images/bedsheet3.jpg" alt="床单3">
+                    </div>
+                </div>
+                <p class="photo-caption">为了生活多样化一些，特地在那里一直挑选一个小时多的床单，摊主都怀疑我要偷床单呢哈哈</p>
+            </div>
+
+            <!-- 第十一组：饮料 -->
+            <div class="photo-group group-11">
+                <div class="photo-batch">
+                    <div class="photo-item" data-delay="100000">
+                        <img src="images/drink1.jpg" alt="饮料1">
+                    </div>
+                    <div class="photo-item" data-delay="102000">
+                        <img src="images/drink2.jpg" alt="饮料2">
+                    </div>
+                    <div class="photo-item" data-delay="104000">
+                        <img src="images/drink3.jpg" alt="饮料3">
+                    </div>
+                </div>
+                <p class="photo-caption">总会预备饮料给你喝，就怕你懒惰出门又想喝饮料</p>
+            </div>
+
+            <!-- 第十二组：礼篮 -->
+            <div class="photo-group group-12">
+                <div class="single-photo">
+                    <img src="images/gift.jpg" alt="礼篮">
+                </div>
+                <p class="photo-caption">拿到礼篮第一个就是想跟你一起分享</p>
+            </div>
+
+            <!-- 第十三组：食物排队 -->
+            <div class="photo-group group-13">
+                <div class="photo-batch">
+                    <div class="photo-item" data-delay="106000">
+                        <img src="images/tart.jpg" alt="Tart">
+                        <div class="photo-note">为了买到好吃的tart给你吃，我排了一个小时多的队结果cheese tart卖完了，只能买tiramisu tar，其实觉得很伤心，但看到你工作回来时，给你吃的那时候你说已经很满足了，我又觉得很高兴一切都值得的</div>
+                    </div>
+                    <div class="photo-item" data-delay="108000">
+                        <img src="images/abang1.jpg" alt="Abang1">
+                        <div class="photo-note">看到很多人买abang balik就忍不住想排队买给你吃，只不过没有干的（因为你喜欢吃），只有湿的</div>
+                    </div>
+                    <div class="photo-item" data-delay="110000">
+                        <img src="images/abang2.jpg" alt="Abang2">
+                        <div class="photo-note">看到很多人买abang balik就忍不住想排队买给你吃，只不过没有干的（因为你喜欢吃），只有湿的</div>
+                    </div>
+                </div>
+                <p class="photo-caption">只要是你喜欢的食物或者是好吃的，无论是在哪里，需要花多少时间我都愿意帮你弄来吃，只为了让你尝一口，包括月饼也是，很多时候都会花上半天时间，就等你放工回来吃</p>
+            </div>
+
+            <!-- 第十四组：酒 -->
+            <div class="photo-group group-14">
+                <div class="single-photo">
+                    <img src="images/wine.jpg" alt="酒">
+                </div>
+                <p class="photo-caption">谢谢你最后送我的酒，我在海边喝了它</p>
+            </div>
+
+            <!-- 第十五组：感谢陪伴 -->
+            <div class="photo-group group-15">
+                <div class="photo-batch">
+                    <div class="photo-item" data-delay="112000">
+                        <img src="images/thanks1.jpg" alt="感谢1">
+                    </div>
+                    <div class="photo-item" data-delay="114000">
+                        <img src="images/thanks2.jpg" alt="感谢2">
+                    </div>
+                    <div class="photo-item" data-delay="116000">
+                        <img src="images/thanks3.jpg" alt="感谢3">
+                    </div>
+                </div>
+                <p class="photo-caption">很感谢这两年半来一直都有你的陪伴</p>
+            </div>
+
+            <!-- 第十六组：聊天记录 -->
+            <div class="photo-group group-16">
+                <div class="chat-photos">
+                    <div class="chat-batch batch-1">
+                        <div class="photo-item" data-delay="118000">
+                            <img src="images/chat1.jpg" alt="聊天1">
+                        </div>
+                        <div class="photo-item" data-delay="120000">
+                            <img src="images/chat2.jpg" alt="聊天2">
+                        </div>
+                        <div class="photo-item" data-delay="122000">
+                            <img src="images/chat3.jpg" alt="聊天3">
+                        </div>
+                        <div class="photo-item" data-delay="124000">
+                            <img src="images/chat4.jpg" alt="聊天4">
+                        </div>
+                        <div class="photo-item" data-delay="126000">
+                            <img src="images/chat5.jpg" alt="聊天5">
+                        </div>
+                        <div class="photo-item" data-delay="128000">
+                            <img src="images/chat6.jpg" alt="聊天6">
+                        </div>
+                        <div class="photo-item" data-delay="130000">
+                            <img src="images/chat7.jpg" alt="聊天7">
+                        </div>
+                    </div>
+                    <div class="chat-batch batch-2">
+                        <div class="photo-item" data-delay="132000">
+                            <img src="images/chat8.jpg" alt="聊天8">
+                        </div>
+                        <div class="photo-item" data-delay="134000">
+                            <img src="images/chat9.jpg" alt="聊天9">
+                        </div>
+                        <div class="photo-item" data-delay="136000">
+                            <img src="images/chat10.jpg" alt="聊天10">
+                        </div>
+                        <div class="photo-item" data-delay="138000">
+                            <img src="images/chat11.jpg" alt="聊天11">
+                        </div>
+                        <div class="photo-item" data-delay="140000">
+                            <img src="images/chat12.jpg" alt="聊天12">
+                        </div>
+                        <div class="photo-item" data-delay="142000">
+                            <img src="images/chat13.jpg" alt="聊天13">
+                        </div>
+                        <div class="photo-item" data-delay="144000">
+                            <img src="images/chat14.jpg" alt="聊天14">
+                        </div>
+                    </div>
+                    <div class="chat-batch batch-3">
+                        <div class="photo-item" data-delay="146000">
+                            <img src="images/chat15.jpg" alt="聊天15">
+                        </div>
+                        <div class="photo-item" data-delay="148000">
+                            <img src="images/chat16.jpg" alt="聊天16">
+                        </div>
+                        <div class="photo-item" data-delay="150000">
+                            <img src="images/chat17.jpg" alt="聊天17">
+                        </div>
+                        <div class="photo-item" data-delay="152000">
+                            <img src="images/chat18.jpg" alt="聊天18">
+                        </div>
+                        <div class="photo-item" data-delay="154000">
+                            <img src="images/chat19.jpg" alt="聊天19">
+                        </div>
+                        <div class="photo-item" data-delay="156000">
+                            <img src="images/chat20.jpg" alt="聊天20">
+                        </div>
+                        <div class="photo-item" data-delay="158000">
+                            <img src="images/chat21.jpg" alt="聊天21">
+                        </div>
+                    </div>
+                </div>
+                <p class="photo-caption">其实我真的有努力跟你聊天噢，这两年来很明显有了很大的改变，一切其实都是为了你，而且不管你在机场还是KOB我都有问你几点到家，到家了一定要通知我，要吃宵夜也不要客气一定要跟我说</p>
             </div>
         </div>
     </section>
@@ -240,6 +606,9 @@
     </section>
 
     <!-- 背景音乐 -->
+    <audio id="cover-music" loop>
+        <source src="audio/town-ocean-view.mp3" type="audio/mpeg">
+    </audio>
     <audio id="bg-music" loop>
         <source src="audio/rain-love.mp3" type="audio/mpeg">
     </audio>
