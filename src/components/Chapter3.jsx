@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, MapPin, Plane } from 'lucide-react'
-import { getVideoUrl, handleVideoError } from '../utils/cloudStorage'
+import { getVideoUrl } from '../config/mediaConfig'
 
 const Chapter3 = ({ onComplete }) => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -25,6 +25,7 @@ const Chapter3 = ({ onComplete }) => {
       id: 3,
       type: "video",
       video: "/videos/chapter3/happy-daily.mp4",
+      videoKey: "chapter3/happy-daily",
       text: "这是我们最快乐的日常，我都会陪伴她，也许我很多东西都不会，但是我真心想要在她身边一直对她好，照顾她"
     },
     {
@@ -152,12 +153,18 @@ const Chapter3 = ({ onComplete }) => {
             transition={{ duration: 1 }}
           >
             <video 
-              src={currentPageData.video}
+              src={getVideoUrl(currentPageData.videoKey) || currentPageData.video}
               autoPlay
               muted
               loop
               className="chapter-video"
               onEnded={() => setCanFlip(true)}
+              onError={(e) => {
+                console.warn('视频加载失败，使用备用源:', e.target.src);
+                if (currentPageData.video) {
+                  e.target.src = currentPageData.video;
+                }
+              }}
             />
             <div className="video-overlay">
               <MapPin className="video-icon" />
