@@ -18,6 +18,7 @@ export const MEDIA_CONFIG = {
   
   // 视频文件映射
   videos: {
+    // 大容量视频 - Cloudinary
     'chapter3/jb-birthday': {
       cloudinary: 'chapter3_jb_birthday',
     },
@@ -32,7 +33,21 @@ export const MEDIA_CONFIG = {
     },
     'chapter4/special-smile': {
       cloudinary: 'chapter4_special_smile',
-    }
+    },
+    
+    // 小容量视频 - GitHub (待添加)
+    // 'chapter3/small-video-1': {
+    //   local: '/videos/chapter3/small-video-1.mp4',
+    // },
+    // 'chapter3/small-video-2': {
+    //   local: '/videos/chapter3/small-video-2.mp4',
+    // },
+    // 'chapter3/small-video-3': {
+    //   local: '/videos/chapter3/small-video-3.mp4',
+    // },
+    // 'chapter4/small-video-4': {
+    //   local: '/videos/chapter4/small-video-4.mp4',
+    // },
   },
   
   // 图片文件映射 (稍后添加)
@@ -47,7 +62,6 @@ export const MEDIA_CONFIG = {
 
 // 获取视频URL
 export const getVideoUrl = (videoKey) => {
-  const service = MEDIA_CONFIG.cloudStorage[MEDIA_CONFIG.currentService]
   const videoConfig = MEDIA_CONFIG.videos[videoKey]
   
   if (!videoConfig) {
@@ -55,13 +69,19 @@ export const getVideoUrl = (videoKey) => {
     return null
   }
   
-  const videoId = videoConfig[MEDIA_CONFIG.currentService]
-  if (!videoId) {
-    console.warn(`Video ID not found for service ${MEDIA_CONFIG.currentService}: ${videoKey}`)
-    return null
+  // 检查是否有 Cloudinary 配置
+  if (videoConfig.cloudinary) {
+    const service = MEDIA_CONFIG.cloudStorage.cloudinary
+    return `${service.baseUrl}${service.transformations || ''}${videoConfig.cloudinary}`
   }
   
-  return `${service.baseUrl}${service.transformations || ''}${videoId}`
+  // 检查是否有本地文件配置
+  if (videoConfig.local) {
+    return videoConfig.local
+  }
+  
+  console.warn(`No video source found for: ${videoKey}`)
+  return null
 }
 
 // 获取图片URL
