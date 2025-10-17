@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, MapPin, Plane } from 'lucide-react'
+import { getVideoUrl, handleVideoError } from '../utils/cloudStorage'
 
 const Chapter3 = ({ onComplete }) => {
   const [currentPage, setCurrentPage] = useState(0)

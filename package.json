@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "compress": "node scripts/compress-videos.js",
+    "setup-media": "mkdir -p public/audio public/images/{cover,chapter1,chapter2,chapter3,chapter4,chapter5,chapter6} public/videos/{chapter3,chapter4}",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.2.0",
