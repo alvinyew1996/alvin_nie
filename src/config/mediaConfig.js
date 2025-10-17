@@ -1,91 +1,47 @@
-// 媒体文件配置 - 支持云存储
+// 媒体文件配置 - Cloudinary 云存储
 export const MEDIA_CONFIG = {
   // 云存储服务配置
   cloudStorage: {
-    // 方案1: 使用免费的 Cloudinary
     cloudinary: {
-      baseUrl: 'https://res.cloudinary.com/您的云名称/video/upload/',
+      baseUrl: 'https://res.cloudinary.com/dowr4/video/upload/',
       // 自动优化参数
       transformations: 'q_auto,f_auto,w_1280,h_720/',
       // 高质量参数
       highQuality: 'q_auto,f_auto,w_1920,h_1080/',
       // 低质量参数（快速加载）
       lowQuality: 'q_auto,f_auto,w_1280,h_720/'
-    },
-    
-    // 方案2: 使用免费的 Imgur
-    imgur: {
-      baseUrl: 'https://i.imgur.com/',
-      // 需要先上传到Imgur获取ID
-    },
-    
-    // 方案3: 使用 Vercel/Netlify
-    vercel: {
-      baseUrl: 'https://您的项目名.vercel.app/videos/',
-    },
-    
-    // 方案4: 使用 GitHub + jsDelivr CDN
-    github: {
-      baseUrl: 'https://cdn.jsdelivr.net/gh/您的用户名/您的仓库名@main/public/videos/',
     }
   },
   
   // 当前使用的服务
-  currentService: 'cloudinary', // 改为您选择的方案
+  currentService: 'cloudinary',
   
   // 视频文件映射
   videos: {
-    // 第三章视频
-    'chapter3/happy-daily': {
-      cloudinary: '您的视频ID1',
-      imgur: '您的视频ID1',
-      vercel: 'chapter3/happy-daily.mp4',
-      github: 'chapter3/happy-daily.mp4'
-    },
-    'chapter3/airport-play': {
-      cloudinary: '您的视频ID2',
-      imgur: '您的视频ID2', 
-      vercel: 'chapter3/airport-play.mp4',
-      github: 'chapter3/airport-play.mp4'
-    },
-    'chapter3/gift-giving': {
-      cloudinary: '您的视频ID3',
-      imgur: '您的视频ID3',
-      vercel: 'chapter3/gift-giving.mp4',
-      github: 'chapter3/gift-giving.mp4'
-    },
     'chapter3/jb-birthday': {
-      cloudinary: '您的视频ID4',
-      imgur: '您的视频ID4',
-      vercel: 'chapter3/jb-birthday.mp4',
-      github: 'chapter3/jb-birthday.mp4'
+      cloudinary: 'chapter3_jb_birthday',
     },
     'chapter3/sunrise-video': {
-      cloudinary: '您的视频ID5',
-      imgur: '您的视频ID5',
-      vercel: 'chapter3/sunrise-video.mp4',
-      github: 'chapter3/sunrise-video.mp4'
+      cloudinary: 'chapter3_sunrise_video',
     },
-    
-    // 第四章视频
-    'chapter4/special-moment': {
-      cloudinary: '您的视频ID6',
-      imgur: '您的视频ID6',
-      vercel: 'chapter4/special-moment.mp4',
-      github: 'chapter4/special-moment.mp4'
+    'chapter3/haidilao-1': {
+      cloudinary: 'chapter3_haidilao_1',
+    },
+    'chapter3/haidilao-2': {
+      cloudinary: 'chapter3_haidilao_2',
+    },
+    'chapter4/special-smile': {
+      cloudinary: 'chapter4_special_smile',
     }
   },
   
-  // 图片文件映射
+  // 图片文件映射 (稍后添加)
   images: {
     // 封面
     'cover/moon-clover': {
-      cloudinary: '您的图片ID1',
-      imgur: '您的图片ID1',
-      vercel: 'cover/moon-clover.jpg',
-      github: 'cover/moon-clover.jpg'
+      cloudinary: '您的封面图片ID', // 请替换为实际ID
     }
-    // ... 其他图片配置
+    // ... 其他图片稍后添加
   }
 }
 
@@ -124,7 +80,7 @@ export const getImageUrl = (imageKey) => {
     return null
   }
   
-  return `${service.baseUrl}${imageId}`
+  return `${service.baseUrl.replace('/video/', '/image/')}${imageId}`
 }
 
 // 检查服务是否可用
