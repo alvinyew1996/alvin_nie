@@ -166,6 +166,27 @@ body {
     margin: 0 auto;
 }
 
+.reference-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.cover-reference-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    opacity: 0.8;
+    filter: brightness(1.1) contrast(1.1);
+}
+
 .moon {
     position: absolute;
     top: 50%;
