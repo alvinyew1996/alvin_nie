@@ -131,18 +131,21 @@ class ChapterGenerator {
                 pages: 19,
                 groups: [
                     { name: '海边厕所', photos: 1, text: '每次陪她疯，在她喝酒喝醉时我都很着急，担心她有危险。' },
-                    { name: '快乐日常', videos: 1, text: '这是我们最快乐的日常，我都会陪伴她，也许我很多东西都不会，但是我真心想要在她身边一直对她好，照顾她' },
-                    { name: '机场游玩', videos: 1, text: '我们一起去机场玩了，好开心。' },
+                    { name: '快乐日常', videos: 1, text: '这是我们最快乐的日常，我都会陪伴她，也许我很多东西都不会，但是我真心想要在她身边一直对她好，照顾她', videoSource: 'local' },
+                    { name: '机场游玩', videos: 1, text: '我们一起去机场玩了，好开心。', videoSource: 'local' },
                     { name: '回家乡', photos: 2, text: '来到新加坡以后第一次回家乡还是想到了你，也是第一次帮你和你爸爸买了衣裤。' },
                     { name: '手表借用', photos: 1, text: '借用你的手表去打球了嘻嘻，也很感谢你偶尔会去球场看我打球甚至是比赛，我都会非常高兴。' },
-                    { name: '送礼物', videos: 1, text: '这是真正意义上这一次送你的礼物 😰' },
+                    { name: '送礼物', videos: 1, text: '这是真正意义上这一次送你的礼物 😰', videoSource: 'local' },
                     { name: '节日排队', photos: 7, text: '就算是陪家人一起过节，我偷偷的为了你排了一个小时多的队就只为了可以买到你说你很喜欢的系列。', subTexts: ['为了买到你喜欢的我不甘心买了好几个。', '看到感觉是你喜欢的东西我就会买给你'] },
                     { name: '朋友制作礼物', photos: 4, text: '就算跟朋友出去也想着你，为了你很认真的制作礼物，甚至没太多跟朋友聊天，真的就一直在想怎么做到最好的给你' },
-                    { name: 'JB游玩', videos: 1, text: '去JB游玩还有一起庆祝生日最开心了' },
-                    { name: '逗猫', videos: 1, text: '在jb时其实很想带她去逗猫可是时间不够' },
+                    { name: 'JB游玩', videos: 1, text: '去JB游玩还有一起庆祝生日最开心了', videoSource: 'cloudinary', videoUrl: 'https://res.cloudinary.com/dowr4almo/video/upload/v1760708502/videos_chapter3_jb_birthday_ymtob7.mp4' },
+                    { name: '逗猫', videos: 1, text: '在jb时其实很想带她去逗猫可是时间不够', videoSource: 'local' },
                     { name: '海鲜餐厅', photos: 1, text: '很好吃的海鲜餐厅，明白你的用心良苦，是你找到的餐厅，虽然那时候很累了，但是却很幸福' },
-                    { name: '海底捞', photos: 1, videos: 2, text: '不会拍照的我还有一个因为我所以很爱拍照的女朋友一起吃了海底捞' },
-                    { name: '日出', photos: 4, videos: 1, text: '我们一起看过最美的日出', subTexts: ['这里我们在看日出之前走过的森林，当时候小Frennie还害怕的样子真的很可爱', '等待日出时一起拍的照片'] }
+                    { name: '海底捞', photos: 1, videos: 2, text: '不会拍照的我还有一个因为我所以很爱拍照的女朋友一起吃了海底捞', videoSource: 'cloudinary', videoUrls: [
+                        'https://res.cloudinary.com/dowr4almo/video/upload/v1760708519/vidoes_chapter3_haidilao_1_jjn0yk.mp4',
+                        'https://res.cloudinary.com/dowr4almo/video/upload/v1760708511/videos_chapter3_haidilao_2_hs1tmn.mp4'
+                    ] },
+                    { name: '日出', photos: 4, videos: 1, text: '我们一起看过最美的日出', subTexts: ['这里我们在看日出之前走过的森林，当时候小Frennie还害怕的样子真的很可爱', '等待日出时一起拍的照片'], videoSource: 'cloudinary', videoUrl: 'https://res.cloudinary.com/dowr4almo/video/upload/v1760708520/videos_chapter3_sunrise_video_afunaj.mp4' }
                 ]
             },
             chapter4: {
@@ -153,9 +156,10 @@ class ChapterGenerator {
                     effect: 'specialGlow'
                 },
                 specialVideo: {
-                    src: 'videos/chapter4/special-moment.mp4',
+                    src: 'https://res.cloudinary.com/dowr4almo/video/upload/v1760708507/videos_chapter4_important_smile_cxvpxn.mp4',
                     text: '那一刻，我只想让时间停在这里。',
-                    effect: 'rainbowBubbles'
+                    effect: 'rainbowBubbles',
+                    source: 'cloudinary'
                 }
             },
             chapter5: {
@@ -334,10 +338,25 @@ class ChapterGenerator {
         
         if (group.videos && group.videos > 0) {
             // 视频页面
+            let videoSource = '';
+            if (group.videoSource === 'cloudinary') {
+                if (group.videoUrls && group.videoUrls.length > 0) {
+                    // 多个视频（如海底捞）
+                    videoSource = group.videoUrls[subPageIndex] || group.videoUrls[0];
+                } else if (group.videoUrl) {
+                    // 单个视频
+                    videoSource = group.videoUrl;
+                }
+            } else {
+                // 本地视频
+                const videoName = this.getVideoFileName(group.name);
+                videoSource = `videos/chapter3/${videoName}.mp4`;
+            }
+            
             page.innerHTML = `
                 <div class="video-container">
                     <video muted autoplay loop>
-                        <source src="videos/chapter3/${group.name.toLowerCase().replace(/\s+/g, '-')}.mp4" type="video/mp4">
+                        <source src="${videoSource}" type="video/mp4">
                     </video>
                 </div>
                 <div class="video-text">${group.text}</div>
@@ -366,6 +385,16 @@ class ChapterGenerator {
         }
         
         return page;
+    }
+
+    getVideoFileName(groupName) {
+        const videoMap = {
+            '快乐日常': 'chapter3_happy_daily',
+            '机场游玩': 'chapter3_airport_play',
+            '送礼物': 'chapter3_gift_giving',
+            '逗猫': 'chapter3_jb_cats'
+        };
+        return videoMap[groupName] || groupName.toLowerCase().replace(/\s+/g, '_');
     }
 
     createSpecialEffects() {

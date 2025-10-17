@@ -57,7 +57,18 @@
 - **Vite** - 构建工具
 - **原生JavaScript** - 交互逻辑
 
-## 安装和运行
+## 快速开始
+
+### 方法一：使用设置脚本
+```bash
+# 运行项目设置
+./start.sh
+
+# 运行GitHub设置
+./github-setup.sh
+```
+
+### 方法二：手动设置
 
 1. 安装依赖：
 ```bash
@@ -74,15 +85,31 @@ npm run dev
 npm run build
 ```
 
+4. 设置GitHub仓库：
+```bash
+# 初始化Git仓库
+git init
+git add .
+git commit -m "Initial commit"
+
+# 添加远程仓库（替换为你的仓库URL）
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+git push -u origin main
+```
+
 ## 文件结构
 
 ```
 ├── index.html              # 主页面
+├── demo.html              # 演示页面
 ├── styles.css              # 样式文件
 ├── main.js                 # 主要逻辑
 ├── chapter-generator.js    # 章节内容生成器
 ├── package.json            # 项目配置
 ├── vite.config.js          # Vite配置
+├── start.sh               # 启动脚本
+├── github-setup.sh        # GitHub设置脚本
+├── GITHUB_SETUP.md        # GitHub设置指南
 ├── images/                 # 图片资源
 │   ├── chapter1/           # 第一章图片
 │   ├── chapter2/           # 第二章图片
@@ -92,6 +119,7 @@ npm run build
 │   └── chapter6/           # 第六章图片
 ├── videos/                 # 视频资源
 │   ├── chapter3/           # 第三章视频
+│   │   └── local/          # 本地小容量视频
 │   └── chapter4/           # 第四章视频
 └── audio/                  # 音频资源
     ├── a-town-with-an-ocean-view.mp3
@@ -99,6 +127,22 @@ npm run build
     ├── left-person.mp3
     └── lie.mp3
 ```
+
+## 视频文件配置
+
+### 本地视频文件
+将小容量视频文件放入 `videos/chapter3/local/` 文件夹：
+- `chapter3_happy_daily.mp4` - 快乐日常
+- `chapter3_airport_play.mp4` - 机场游玩
+- `chapter3_gift_giving.mp4` - 送礼物
+- `chapter3_jb_cats.mp4` - 逗猫
+
+### Cloudinary CDN视频
+大容量视频已配置为使用Cloudinary CDN：
+- JB庆祝生日视频
+- 海底捞视频（2个）
+- 日出视频
+- 第四章重要视频
 
 ## 使用说明
 

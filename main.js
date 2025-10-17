@@ -417,6 +417,8 @@ class MemoryDiary {
             
             // 播放视频
             const video = document.getElementById('special-video');
+            video.src = 'https://res.cloudinary.com/dowr4almo/video/upload/v1760708507/videos_chapter4_important_smile_cxvpxn.mp4';
+            video.load();
             video.play();
             
             // 视频结束后恢复音乐
