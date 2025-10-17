@@ -166,6 +166,7 @@ class ChapterGenerator {
                 pages: 12,
                 individualPhotos: 9,
                 giftPhotos: 11,
+                voiceFile: 'audio/voice.mp3',
                 voiceMessage: {
                     text: '其实我做这个网页，不是为了让你难过。只是想让我们都记得那些开心的时光，真的做着情侣都做的事情。',
                     duration: 60000

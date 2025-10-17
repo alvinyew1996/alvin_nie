@@ -26,7 +26,7 @@
         <!-- 章节内容容器 -->
         <div id="content-container">
             <!-- 封面内容 -->
-            <div id="cover-content" class="chapter-content">
+            <div id="cover-content" class="chapter-content" style="display: none;">
                 <div class="book-title">
                     <h1>我们之间的故事</h1>
                     <p class="subtitle">——献给那个曾经让我笑、让我成长的人。</p>
@@ -141,6 +141,12 @@
                 </div>
 
                 <div class="voice-message" style="display: none;">
+                    <div class="voice-player">
+                        <audio id="voice-audio" controls>
+                            <source src="audio/voice.mp3" type="audio/mpeg">
+                            你的浏览器不支持音频播放。
+                        </audio>
+                    </div>
                     <div class="voice-text">
                         <p>其实我做这个网页，不是为了让你难过。</p>
                         <p>只是想让我们都记得那些开心的时光，</p>

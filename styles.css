@@ -761,6 +761,29 @@ body {
     border: 2px solid rgba(255, 215, 0, 0.3);
 }
 
+.voice-player {
+    margin-bottom: 30px;
+}
+
+.voice-player audio {
+    width: 100%;
+    max-width: 500px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    outline: none;
+}
+
+.voice-player audio::-webkit-media-controls-panel {
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 25px;
+}
+
+.voice-player audio::-webkit-media-controls-play-button {
+    background: #ffd700;
+    border-radius: 50%;
+}
+
 .voice-text {
     font-size: 1.3rem;
     color: #e6e6e6;

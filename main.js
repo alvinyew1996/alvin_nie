@@ -299,6 +299,7 @@ class MemoryDiary {
     showCover() {
         const coverContent = document.getElementById('cover-content');
         coverContent.style.display = 'block';
+        coverContent.classList.add('active');
         
         // 显示回访用户消息
         if (this.isReturnVisitor) {
@@ -314,6 +315,11 @@ class MemoryDiary {
             { opacity: 0, scale: 0.8 },
             { opacity: 1, scale: 1, duration: 2, ease: "power2.out" }
         );
+        
+        // 确保封面内容可见
+        setTimeout(() => {
+            coverContent.style.visibility = 'visible';
+        }, 100);
     }
 
     startPageFlip() {
@@ -384,6 +390,8 @@ class MemoryDiary {
                 this.switchToScrollMode();
             } else if (chapterNumber === 4) {
                 this.handleChapter4SpecialEffects();
+            } else if (chapterNumber === 5) {
+                this.handleChapter5Voice();
             } else if (chapterNumber === 6) {
                 this.handleChapter6Ending();
             } else {
@@ -426,6 +434,29 @@ class MemoryDiary {
                 this.audioManager.resume();
             });
         }, 3000);
+    }
+
+    handleChapter5Voice() {
+        // 第五章语音处理
+        const voiceMessage = document.querySelector('.voice-message');
+        const finalMessage = document.querySelector('.final-message');
+        
+        // 显示语音播放器
+        setTimeout(() => {
+            voiceMessage.style.display = 'block';
+            
+            // 播放语音
+            const voiceAudio = document.getElementById('voice-audio');
+            if (voiceAudio) {
+                voiceAudio.play();
+                
+                // 语音播放结束后显示最终消息
+                voiceAudio.addEventListener('ended', () => {
+                    voiceMessage.style.display = 'none';
+                    finalMessage.style.display = 'block';
+                });
+            }
+        }, 2000);
     }
 
     handleChapter6Ending() {
