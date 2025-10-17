@@ -20,19 +20,19 @@ export const MEDIA_CONFIG = {
   videos: {
     // 大容量视频 - Cloudinary
     'chapter3/jb-birthday': {
-      cloudinary: 'chapter3_jb_birthday',
+      cloudinary: 'videos_chapter3_jb_birthday_xxxxx', // 请提供实际ID
     },
     'chapter3/sunrise-video': {
-      cloudinary: 'chapter3_sunrise_video',
+      cloudinary: 'videos_chapter3_sunrise_video_afunaj', // ✅ 已确认
     },
     'chapter3/haidilao-1': {
-      cloudinary: 'chapter3_haidilao_1',
+      cloudinary: 'videos_chapter3_haidilao_1_xxxxx', // 请提供实际ID
     },
     'chapter3/haidilao-2': {
-      cloudinary: 'chapter3_haidilao_2',
+      cloudinary: 'videos_chapter3_haidilao_2_xxxxx', // 请提供实际ID
     },
     'chapter4/special-smile': {
-      cloudinary: 'chapter4_special_smile',
+      cloudinary: 'videos_chapter4_special_smile_xxxxx', // 请提供实际ID
     },
     
     // 小容量视频 - GitHub (待添加)
