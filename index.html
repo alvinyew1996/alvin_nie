@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的网页</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>我的网站</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">首页</a></li>
+                <li><a href="#about" class="nav-link">关于</a></li>
+                <li><a href="#services" class="nav-link">服务</a></li>
+                <li><a href="#contact" class="nav-link">联系</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h2 class="hero-title">欢迎来到我的网站</h2>
+                <p class="hero-description">这是一个现代化的响应式网页，展示了最新的设计趋势和用户体验。</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary">开始探索</button>
+                    <button class="btn btn-secondary">了解更多</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-placeholder">
+                    <div class="floating-card">
+                        <h3>特色功能</h3>
+                        <p>响应式设计</p>
+                    </div>
+                    <div class="floating-card">
+                        <h3>现代UI</h3>
+                        <p>美观界面</p>
+                    </div>
+                    <div class="floating-card">
+                        <h3>快速加载</h3>
+                        <p>优化性能</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">关于我们</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="card-icon">🚀</div>
+                        <h3>创新技术</h3>
+                        <p>使用最新的Web技术栈，为用户提供卓越的体验。</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon">🎨</div>
+                        <h3>精美设计</h3>
+                        <p>注重每一个细节，创造视觉上的享受。</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon">⚡</div>
+                        <h3>高性能</h3>
+                        <p>优化加载速度，确保流畅的用户体验。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">我们的服务</h2>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <h3>网页设计</h3>
+                        <p>创建美观、现代的网页设计，提升品牌形象。</p>
+                        <ul>
+                            <li>响应式设计</li>
+                            <li>用户体验优化</li>
+                            <li>品牌一致性</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>前端开发</h3>
+                        <p>使用现代技术栈开发高性能的前端应用。</p>
+                        <ul>
+                            <li>React/Vue.js</li>
+                            <li>TypeScript</li>
+                            <li>性能优化</li>
+                        </ul>
+                    </div>
+                    <div class="service-item">
+                        <h3>移动端适配</h3>
+                        <p>确保在各种设备上都有完美的显示效果。</p>
+                        <ul>
+                            <li>移动优先设计</li>
+                            <li>触摸友好</li>
+                            <li>跨平台兼容</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">联系我们</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>获取联系</h3>
+                        <p>有任何问题或想法？我们很乐意听到你的声音。</p>
+                        <div class="contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span>hello@example.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <span>+86 123 4567 8900</span>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>中国，北京</span>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="你的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="你的邮箱" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="你的消息" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">发送消息</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>我的网站</h3>
+                    <p>创造美好的数字体验</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="#home">首页</a></li>
+                        <li><a href="#about">关于</a></li>
+                        <li><a href="#services">服务</a></li>
+                        <li><a href="#contact">联系</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>社交媒体</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link">微博</a>
+                        <a href="#" class="social-link">微信</a>
+                        <a href="#" class="social-link">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 我的网站. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
