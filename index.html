@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我们之间的故事 - 回忆录</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loading-text">正在加载回忆...</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <div id="app">
+        <!-- 星空背景 -->
+        <div id="stars-background"></div>
+        
+        <!-- 3D书本容器 -->
+        <div id="book-container">
+            <canvas id="book-canvas"></canvas>
+        </div>
+
+        <!-- 章节内容容器 -->
+        <div id="content-container">
+            <!-- 封面内容 -->
+            <div id="cover-content" class="chapter-content">
+                <div class="book-title">
+                    <h1>我们之间的故事</h1>
+                    <p class="subtitle">——献给那个曾经让我笑、让我成长的人。</p>
+                    <div id="return-visitor-message" class="return-message" style="display: none;">
+                        <p>希望你现在真的开心了。</p>
+                    </div>
+                </div>
+                <div class="moon-lucky-clover">
+                    <div class="moon"></div>
+                    <div class="lucky-clover"></div>
+                    <div class="stars-around"></div>
+                </div>
+            </div>
+
+            <!-- 第一章：初遇 -->
+            <div id="chapter1" class="chapter-content" style="display: none;">
+                <div class="chapter-title">第一章：初遇</div>
+                <div class="chapter-subtitle">那天的我们之间的相遇，故事的开始。</div>
+                
+                <div class="photo-page" data-page="1">
+                    <div class="photo-container">
+                        <img src="images/chapter1/meeting1.jpg" alt="第一次相遇" class="photo">
+                    </div>
+                    <div class="photo-text">
+                        那天我怀着忐忑的心进入了自己不熟悉的领域和工作地点，但我却在那天遇见了你，在这里的一切是我和你的开始。
+                    </div>
+                </div>
+
+                <div class="photo-page" data-page="2" style="display: none;">
+                    <div class="photo-container">
+                        <img src="images/chapter1/meeting2.jpg" alt="第二次见面" class="photo">
+                    </div>
+                </div>
+
+                <div class="photo-page" data-page="3" style="display: none;">
+                    <div class="photo-container">
+                        <img src="images/chapter1/meeting3.jpg" alt="海边约会" class="photo">
+                    </div>
+                    <div class="photo-text">
+                        这是第一次单独约我出来去海边，愿意分享你的心事给我，那晚我心跳加速了
+                    </div>
+                </div>
+
+                <div class="photo-page" data-page="4" style="display: none;">
+                    <div class="photo-container">
+                        <img src="images/chapter1/meeting4.jpg" alt="肩膀" class="photo">
+                    </div>
+                    <div class="photo-text">
+                        在最初遇见的三四月里，你主动的把手搭到我肩膀上了，让我很是高兴又苦恼，高兴的是你愿意靠近我了，苦恼的是我不知道该不该亲近你还是保持距离 😊
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二章：相处的日子 -->
+            <div id="chapter2" class="chapter-content" style="display: none;">
+                <div class="chapter-title">第二章：相处的日子</div>
+                <div class="chapter-subtitle">那些简单的小事，其实最幸福。</div>
+                <div class="chapter-description">
+                    其实最幸福的时光，是我们一起无所事事的时候，每时每刻都为你解决事情的时候，在分开以前从来没有食言，只对你一个人好。
+                </div>
+                
+                <!-- 这里会动态生成24个页面 -->
+                <div id="chapter2-pages"></div>
+            </div>
+
+            <!-- 第三章：旅行 -->
+            <div id="chapter3" class="chapter-content scroll-chapter" style="display: none;">
+                <div class="chapter-title">第三章：旅行</div>
+                <div class="chapter-subtitle">我们走过的地方，每个都值得。</div>
+                
+                <div class="scroll-container">
+                    <div class="scroll-content">
+                        <!-- 这里会动态生成19个页面 -->
+                        <div id="chapter3-pages"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第四章：那些笑容 -->
+            <div id="chapter4" class="chapter-content" style="display: none;">
+                <div class="chapter-title">第四章：那些笑容</div>
+                <div class="chapter-subtitle">纯粹的快乐，最难忘。</div>
+                
+                <div class="special-photo-page">
+                    <div class="photo-container special-effect">
+                        <img src="images/chapter4/special-moment.jpg" alt="特别时刻" class="photo">
+                    </div>
+                    <div class="photo-text special-text">
+                        那时候我看到了你的眼神，满眼都是期待和开心，眼里只有我，而我也一样，那一天的那个瞬间其实我也迷恋了你。
+                    </div>
+                </div>
+
+                <div class="video-page" style="display: none;">
+                    <div class="video-container">
+                        <video id="special-video" muted>
+                            <source src="videos/chapter4/special-moment.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-overlay">
+                            <div class="video-text">那一刻，我只想让时间停在这里。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第五章：我想对你说 -->
+            <div id="chapter5" class="chapter-content" style="display: none;">
+                <div class="chapter-title">第五章：我想对你说</div>
+                <div class="chapter-subtitle">那段话，只想让你听见一次。</div>
+                
+                <div id="chapter5-pages">
+                    <!-- 这里会动态生成12个页面 -->
+                </div>
+
+                <div class="voice-message" style="display: none;">
+                    <div class="voice-text">
+                        <p>其实我做这个网页，不是为了让你难过。</p>
+                        <p>只是想让我们都记得那些开心的时光，</p>
+                        <p>真的做着情侣都做的事情。</p>
+                    </div>
+                </div>
+
+                <div class="final-message" style="display: none;">
+                    <p>谢谢你陪我走过的日子，</p>
+                    <p>无论未来我们在世界的哪个角落，</p>
+                    <p>希望你一直笑得像陪伴我时最开心的时候一样灿烂。</p>
+                </div>
+            </div>
+
+            <!-- 第六章：结尾 -->
+            <div id="chapter6" class="chapter-content ending-chapter" style="display: none;">
+                <div class="book-back">
+                    <div class="back-photo">
+                        <img src="images/chapter6/final-photo.jpg" alt="最后的照片" class="photo">
+                    </div>
+                    <div class="back-text">
+                        其实这张是我想发自内心笑给你看的，因为从来没让你知道，遇见你我是多么的高兴。
+                    </div>
+                </div>
+
+                <div class="final-words" style="display: none;">
+                    <div class="words-container">
+                        <p>要开心，不要经常有太多情绪。</p>
+                        <p>对其他人不要有太多的期待。</p>
+                        <p>一定要对自己好，只有自己好起来才是最重要的。</p>
+                        <p>这样就会有一个稳定的内核不怕被内耗，</p>
+                        <p>不论遇到什么事情，都能让自己坚强，</p>
+                        <p>也不会受太大的伤害。</p>
+                        <p>你的人生才会慢慢形成你想要的样子。</p>
+                        <p>以后好好生活，希望你都可以过得很好的生活。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 翻页控制 -->
+        <div id="page-controls">
+            <button id="prev-page" class="page-btn">上一页</button>
+            <button id="next-page" class="page-btn">下一页</button>
+        </div>
+
+        <!-- 音频控制 -->
+        <div id="audio-controls">
+            <button id="play-pause" class="audio-btn">▶️</button>
+            <button id="mute-unmute" class="audio-btn">🔊</button>
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
