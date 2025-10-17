@@ -3,7 +3,7 @@ export const MEDIA_CONFIG = {
   // 云存储服务配置
   cloudStorage: {
     cloudinary: {
-      baseUrl: 'https://res.cloudinary.com/dowr4/video/upload/',
+      baseUrl: 'https://res.cloudinary.com/dowr4almo/video/upload/',
       // 自动优化参数
       transformations: 'q_auto,f_auto,w_1280,h_720/',
       // 高质量参数
