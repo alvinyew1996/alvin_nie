@@ -4,6 +4,120 @@
   box-sizing: border-box;
 }
 
+/* 全局动画关键帧 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { 
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from { 
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% { 
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes heartFloat {
+  0% { 
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(-50px) scale(1);
+  }
+  100% { 
+    opacity: 0;
+    transform: translateY(-100px) scale(0);
+  }
+}
+
+@keyframes bubbleFloat {
+  0% { 
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: translateY(-100px) scale(1);
+  }
+  100% { 
+    opacity: 0;
+    transform: translateY(-200px) scale(0);
+  }
+}
+
+@keyframes petalFall {
+  0% { 
+    opacity: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(300px) rotate(360deg);
+  }
+}
+
+@keyframes meteor {
+  0% { 
+    opacity: 0;
+    transform: translateX(0) translateY(0);
+  }
+  10% { 
+    opacity: 1;
+  }
+  100% { 
+    opacity: 0;
+    transform: translateX(300px) translateY(300px);
+  }
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -1139,4 +1253,372 @@ body {
   .chapter6 .final-message {
     font-size: 1rem;
   }
+}
+
+/* 封面页面增强样式 */
+.moon-clover-image {
+  position: relative;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-placeholder {
+  width: 200px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  overflow: hidden;
+}
+
+.moon-clover-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.fallback-image {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.clover {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 1.2rem;
+  color: #FFD700;
+  animation: sparkle 2s infinite;
+}
+
+/* 尘粒效果 */
+.dust-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.dust-particle {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
+  font-weight: bold;
+  animation: dustFloat 3s infinite;
+}
+
+@keyframes dustFloat {
+  0% { 
+    opacity: 0;
+    transform: translateY(0) translateX(0) scale(0);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(-50px) translateX(20px) scale(1);
+  }
+  100% { 
+    opacity: 0;
+    transform: translateY(-100px) translateX(40px) scale(0);
+  }
+}
+
+/* 照片淡入效果 */
+.photo-fade-in {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  animation: photoShine 2s ease-in-out;
+}
+
+@keyframes photoShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* 第三章横向模式 */
+.chapter3.horizontal-mode {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.chapter3.horizontal-mode .book-page {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  min-width: 100vw;
+}
+
+/* 第四章特殊特效 */
+.special-effects {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.heart-particle {
+  position: absolute;
+  animation: heartFloat 2s infinite;
+}
+
+.bubble {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: bubbleFloat 3s infinite;
+}
+
+.petal {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: petalFall 4s infinite;
+}
+
+.photo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: glow 2s infinite;
+}
+
+/* 第五章语音播放器 */
+.voice-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.play-button {
+  background: #8B4513;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.play-button:hover {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8B4513, #FFD700);
+  transition: width 0.1s ease;
+}
+
+/* 第六章最终特效 */
+.book-closing {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.closing-book {
+  width: 400px;
+  height: 500px;
+  background: #8B4513;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.book-cover-closing {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+  border-radius: 10px;
+  position: relative;
+}
+
+.book-back-cover {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+.back-cover {
+  width: 400px;
+  height: 500px;
+  background: #8B4513;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.back-cover-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.final-photo-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+}
+
+.final-photo {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.final-photo-text {
+  margin-top: 20px;
+  color: #F5F5DC;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-style: italic;
+  text-align: center;
+}
+
+.night-sky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+  z-index: 998;
+}
+
+.final-moon {
+  position: absolute;
+  top: 20%;
+  right: 15%;
+  z-index: 1;
+}
+
+.moon-glow-final {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: glow 3s infinite;
+}
+
+.final-stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.final-star {
+  position: absolute;
+  animation: sparkle 2s infinite;
+}
+
+.meteors {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.meteor {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: linear-gradient(45deg, #FFD700, transparent);
+  border-radius: 50%;
+  animation: meteor 2s infinite;
+}
+
+.final-messages {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  text-align: center;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.final-message {
+  font-size: 1.2rem;
+  color: #F5F5DC;
+  margin-bottom: 20px;
+  line-height: 1.8;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  animation: slideInUp 0.8s ease-out;
 }

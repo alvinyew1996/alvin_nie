@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 const Chapter1 = ({ onComplete }) => {
   const [currentPage, setCurrentPage] = useState(0)
   const [canFlip, setCanFlip] = useState(false)
+  const [showText, setShowText] = useState(false)
 
   const pages = [
     {
@@ -32,10 +33,26 @@ const Chapter1 = ({ onComplete }) => {
   ]
 
   useEffect(() => {
+    // 播放背景音乐
+    if (window.audioManager) {
+      window.audioManager.playAudio('chapter1')
+    }
+
     const delay = currentPage === 0 ? 8000 : 3000
     const timer = setTimeout(() => {
       setCanFlip(true)
     }, delay)
+
+    // 第一页文字延迟显示
+    if (currentPage === 0) {
+      const textTimer = setTimeout(() => {
+        setShowText(true)
+      }, 2000)
+      return () => {
+        clearTimeout(timer)
+        clearTimeout(textTimer)
+      }
+    }
 
     return () => clearTimeout(timer)
   }, [currentPage])
@@ -44,6 +61,7 @@ const Chapter1 = ({ onComplete }) => {
     if (currentPage < pages.length - 1) {
       setCurrentPage(currentPage + 1)
       setCanFlip(false)
+      setShowText(false)
     } else {
       onComplete()
     }
@@ -53,6 +71,7 @@ const Chapter1 = ({ onComplete }) => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1)
       setCanFlip(false)
+      setShowText(false)
     }
   }
 
@@ -99,12 +118,19 @@ const Chapter1 = ({ onComplete }) => {
             <div className="photo-overlay">
               <div className="loading-text">照片加载中...</div>
             </div>
+            {/* 照片淡入效果 */}
+            <motion.div 
+              className="photo-fade-in"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+            />
           </div>
         </motion.div>
 
         {/* 文字内容 */}
         <AnimatePresence>
-          {currentPageData.text && (
+          {currentPageData.text && showText && (
             <motion.div 
               className="page-text"
               initial={{ opacity: 0, y: 20 }}

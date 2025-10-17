@@ -5,6 +5,9 @@ import { ChevronLeft, ChevronRight, Heart, Gift, Mic } from 'lucide-react'
 const Chapter5 = ({ onComplete }) => {
   const [currentPage, setCurrentPage] = useState(0)
   const [canFlip, setCanFlip] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [audioProgress, setAudioProgress] = useState(0)
+  const [audioRef, setAudioRef] = useState(null)
 
   const pages = [
     {
@@ -33,6 +36,11 @@ const Chapter5 = ({ onComplete }) => {
   ]
 
   useEffect(() => {
+    // 播放背景音乐
+    if (window.audioManager) {
+      window.audioManager.playAudio('chapter5')
+    }
+
     const delay = getPageDelay(currentPage)
     const timer = setTimeout(() => {
       setCanFlip(true)
@@ -160,6 +168,44 @@ const Chapter5 = ({ onComplete }) => {
             <div className="voice-player">
               <div className="voice-icon">
                 <Mic size={60} color="#8B4513" />
+              </div>
+              
+              <audio 
+                ref={setAudioRef}
+                src="/audio/voice-message.mp3"
+                onTimeUpdate={(e) => {
+                  const progress = (e.target.currentTime / e.target.duration) * 100
+                  setAudioProgress(progress)
+                }}
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => {
+                  setIsPlaying(false)
+                  setCanFlip(true)
+                }}
+              />
+              
+              <div className="voice-controls">
+                <button 
+                  className="play-button"
+                  onClick={() => {
+                    if (audioRef) {
+                      if (isPlaying) {
+                        audioRef.pause()
+                      } else {
+                        audioRef.play()
+                      }
+                    }
+                  }}
+                >
+                  {isPlaying ? '⏸️' : '▶️'}
+                </button>
+                <div className="progress-bar">
+                  <div 
+                    className="progress-fill"
+                    style={{ width: `${audioProgress}%` }}
+                  />
+                </div>
               </div>
               
               <motion.div 

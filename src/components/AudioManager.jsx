@@ -4,6 +4,7 @@ import { Howl } from 'howler'
 const AudioManager = () => {
   const currentAudioRef = useRef(null)
   const audioQueueRef = useRef([])
+  const isPausedRef = useRef(false)
 
   useEffect(() => {
     // 预加载音频文件
@@ -22,8 +23,14 @@ const AudioManager = () => {
       const sound = new Howl({
         src: [audioFiles[key]],
         loop: true,
-        volume: 0.7,
-        preload: true
+        volume: 0.6,
+        preload: true,
+        onload: () => {
+          console.log(`Audio loaded: ${key}`)
+        },
+        onloaderror: (id, error) => {
+          console.warn(`Audio load error for ${key}:`, error)
+        }
       })
       audioQueueRef.current[key] = sound
     })
@@ -37,6 +44,14 @@ const AudioManager = () => {
   }, [])
 
   const playAudio = (audioKey) => {
+    // 如果当前音频和要播放的音频相同，且已暂停，则恢复播放
+    if (currentAudioRef.current && currentAudioRef.current._src === audioQueueRef.current[audioKey]?._src) {
+      if (isPausedRef.current) {
+        resumeAudio()
+        return
+      }
+    }
+
     // 停止当前音频
     if (currentAudioRef.current) {
       currentAudioRef.current.stop()
@@ -47,6 +62,7 @@ const AudioManager = () => {
     if (sound) {
       sound.play()
       currentAudioRef.current = sound
+      isPausedRef.current = false
     }
   }
 
@@ -54,18 +70,44 @@ const AudioManager = () => {
     if (currentAudioRef.current) {
       currentAudioRef.current.stop()
       currentAudioRef.current = null
+      isPausedRef.current = false
     }
   }
 
   const pauseAudio = () => {
     if (currentAudioRef.current) {
       currentAudioRef.current.pause()
+      isPausedRef.current = true
     }
   }
 
   const resumeAudio = () => {
     if (currentAudioRef.current) {
       currentAudioRef.current.play()
+      isPausedRef.current = false
+    }
+  }
+
+  const setVolume = (volume) => {
+    if (currentAudioRef.current) {
+      currentAudioRef.current.volume(volume)
+    }
+  }
+
+  const fadeOut = (duration = 2000) => {
+    if (currentAudioRef.current) {
+      currentAudioRef.current.fade(currentAudioRef.current.volume(), 0, duration)
+      setTimeout(() => {
+        stopAudio()
+      }, duration)
+    }
+  }
+
+  const fadeIn = (audioKey, duration = 2000) => {
+    playAudio(audioKey)
+    if (currentAudioRef.current) {
+      currentAudioRef.current.volume(0)
+      currentAudioRef.current.fade(0, 0.6, duration)
     }
   }
 
@@ -75,7 +117,10 @@ const AudioManager = () => {
       playAudio,
       stopAudio,
       pauseAudio,
-      resumeAudio
+      resumeAudio,
+      setVolume,
+      fadeOut,
+      fadeIn
     }
   }, [])
 

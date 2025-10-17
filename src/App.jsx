@@ -58,6 +58,8 @@ function App() {
 
   return (
     <div className="app">
+      <AudioManager />
+      
       <AnimatePresence>
         {showCover && (
           <CoverPage 

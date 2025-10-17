@@ -25,6 +25,11 @@ const Chapter4 = ({ onComplete }) => {
   ]
 
   useEffect(() => {
+    // 播放背景音乐
+    if (window.audioManager) {
+      window.audioManager.playAudio('chapter4')
+    }
+
     const delay = getPageDelay(currentPage)
     const timer = setTimeout(() => {
       setCanFlip(true)
@@ -172,7 +177,17 @@ const Chapter4 = ({ onComplete }) => {
                 muted={false}
                 loop={false}
                 className="special-video"
+                onPlay={() => {
+                  // 暂停背景音乐
+                  if (window.audioManager) {
+                    window.audioManager.pauseAudio()
+                  }
+                }}
                 onEnded={() => {
+                  // 恢复背景音乐
+                  if (window.audioManager) {
+                    window.audioManager.resumeAudio()
+                  }
                   setCanFlip(true)
                 }}
               />

@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, MapPin, Plane } from 'lucide-react'
 const Chapter3 = ({ onComplete }) => {
   const [currentPage, setCurrentPage] = useState(0)
   const [canFlip, setCanFlip] = useState(false)
+  const [isHorizontalMode, setIsHorizontalMode] = useState(false)
 
   const pages = [
     {
@@ -57,12 +58,26 @@ const Chapter3 = ({ onComplete }) => {
   ]
 
   useEffect(() => {
+    // 播放背景音乐
+    if (window.audioManager) {
+      window.audioManager.playAudio('chapter3')
+    }
+
     const delay = getPageDelay(currentPage)
     const timer = setTimeout(() => {
       setCanFlip(true)
     }, delay)
 
     return () => clearTimeout(timer)
+  }, [currentPage])
+
+  useEffect(() => {
+    // 第三章启用横向模式
+    if (currentPage > 0) {
+      setIsHorizontalMode(true)
+    } else {
+      setIsHorizontalMode(false)
+    }
   }, [currentPage])
 
   const getPageDelay = (pageIndex) => {
@@ -249,7 +264,7 @@ const Chapter3 = ({ onComplete }) => {
 
   return (
     <motion.div 
-      className="chapter3"
+      className={`chapter3 ${isHorizontalMode ? 'horizontal-mode' : ''}`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

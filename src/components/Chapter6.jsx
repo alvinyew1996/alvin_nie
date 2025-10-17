@@ -12,6 +12,11 @@ const Chapter6 = ({ onComplete }) => {
   const [showMeteors, setShowMeteors] = useState(false)
 
   useEffect(() => {
+    // 播放背景音乐
+    if (window.audioManager) {
+      window.audioManager.playAudio('chapter6')
+    }
+
     // 书本合上动画
     const timer1 = setTimeout(() => {
       setShowBookClose(true)
@@ -41,8 +46,15 @@ const Chapter6 = ({ onComplete }) => {
       setShowMeteors(true)
     }, 15000)
 
-    // 最终结束
+    // 音乐渐弱
     const timer7 = setTimeout(() => {
+      if (window.audioManager) {
+        window.audioManager.fadeOut(5000)
+      }
+    }, 20000)
+
+    // 最终结束
+    const timer8 = setTimeout(() => {
       onComplete()
     }, 50000) // 25秒文字 + 25秒流星效果
 
@@ -54,6 +66,7 @@ const Chapter6 = ({ onComplete }) => {
       clearTimeout(timer5)
       clearTimeout(timer6)
       clearTimeout(timer7)
+      clearTimeout(timer8)
     }
   }, [onComplete])
 

@@ -7,12 +7,19 @@ const CoverPage = ({ onComplete, isSecondVisit }) => {
   const [showSubtitle, setShowSubtitle] = useState(false)
   const [showImage, setShowImage] = useState(false)
   const [showSecondVisitText, setShowSecondVisitText] = useState(false)
+  const [showDust, setShowDust] = useState(false)
   const [canFlip, setCanFlip] = useState(false)
+  const [bookOpen, setBookOpen] = useState(false)
 
   useEffect(() => {
-    // 15秒后可以翻页
+    // 15秒后开始翻页动画
     const timer = setTimeout(() => {
-      setCanFlip(true)
+      setShowDust(true)
+      setBookOpen(true)
+      // 2秒后可以点击翻页
+      setTimeout(() => {
+        setCanFlip(true)
+      }, 2000)
     }, 15000)
 
     return () => clearTimeout(timer)
@@ -22,7 +29,7 @@ const CoverPage = ({ onComplete, isSecondVisit }) => {
     // 标题动画序列
     const titleTimer = setTimeout(() => setShowTitle(true), 1000)
     const subtitleTimer = setTimeout(() => setShowSubtitle(true), 2000)
-    const imageTimer = setTimeout(() => setImage(true), 3000)
+    const imageTimer = setTimeout(() => setShowImage(true), 3000)
     const secondVisitTimer = setTimeout(() => setShowSecondVisitText(true), 4000)
 
     return () => {
@@ -80,7 +87,11 @@ const CoverPage = ({ onComplete, isSecondVisit }) => {
       <motion.div 
         className="old-book"
         initial={{ scale: 0.8, rotateY: -30, opacity: 0 }}
-        animate={{ scale: 1, rotateY: 0, opacity: 1 }}
+        animate={{ 
+          scale: bookOpen ? 1.1 : 1, 
+          rotateY: bookOpen ? 5 : 0, 
+          opacity: 1 
+        }}
         transition={{ duration: 2, delay: 1 }}
       >
         <div className="book-cover">
@@ -137,10 +148,21 @@ const CoverPage = ({ onComplete, isSecondVisit }) => {
                   transition={{ duration: 1, delay: 1.5 }}
                 >
                   <div className="image-placeholder">
-                    <Moon size={40} color="#FFD700" />
-                    <div className="clover">🍀</div>
+                    <img 
+                      src="/images/cover/moon-clover.jpg" 
+                      alt="月亮和幸运草"
+                      className="moon-clover-photo"
+                      onError={(e) => {
+                        e.target.style.display = 'none'
+                        e.target.nextSibling.style.display = 'flex'
+                      }}
+                    />
+                    <div className="fallback-image">
+                      <Moon size={40} color="#FFD700" />
+                      <div className="clover">🍀</div>
+                    </div>
                     <div className="sparkles">
-                      {Array.from({ length: 8 }).map((_, i) => (
+                      {Array.from({ length: 12 }).map((_, i) => (
                         <motion.div
                           key={i}
                           className="sparkle"
@@ -169,6 +191,45 @@ const CoverPage = ({ onComplete, isSecondVisit }) => {
           </div>
         </div>
       </motion.div>
+
+      {/* 尘粒效果 */}
+      <AnimatePresence>
+        {showDust && (
+          <motion.div 
+            className="dust-particles"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {Array.from({ length: 20 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className="dust-particle"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                initial={{ opacity: 0, scale: 0, y: 0 }}
+                animate={{ 
+                  opacity: [0, 1, 0],
+                  scale: [0, 1, 0],
+                  y: [0, -100, -200],
+                  x: [0, Math.random() * 100 - 50]
+                }}
+                transition={{
+                  duration: 3,
+                  delay: Math.random() * 1,
+                  repeat: Infinity,
+                  repeatDelay: 2
+                }}
+              >
+                •
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* 翻页提示 */}
       <AnimatePresence>
