@@ -174,7 +174,7 @@ const Chapter4 = ({ onComplete }) => {
           >
             <div className="video-wrapper">
               <video 
-                src={currentPageData.video}
+                src={getVideoUrl(currentPageData.videoKey) || currentPageData.video}
                 autoPlay
                 muted={false}
                 loop={false}
@@ -191,6 +191,12 @@ const Chapter4 = ({ onComplete }) => {
                     window.audioManager.resumeAudio()
                   }
                   setCanFlip(true)
+                }}
+                onError={(e) => {
+                  console.warn('视频加载失败，使用备用源:', e.target.src);
+                  if (currentPageData.video) {
+                    e.target.src = currentPageData.video;
+                  }
                 }}
               />
               
