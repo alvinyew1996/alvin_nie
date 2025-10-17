@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Canvas } from '@react-three/fiber'
 import { motion, AnimatePresence } from 'framer-motion'
-import Book3D from './components/Book3D'
 import CoverPage from './components/CoverPage'
 import Chapter1 from './components/Chapter1'
 import Chapter2 from './components/Chapter2'
@@ -9,12 +7,9 @@ import Chapter3 from './components/Chapter3'
 import Chapter4 from './components/Chapter4'
 import Chapter5 from './components/Chapter5'
 import Chapter6 from './components/Chapter6'
-import AudioManager from './components/AudioManager'
-import { chapters } from './data/chapters'
 
 function App() {
   const [currentChapter, setCurrentChapter] = useState(0)
-  const [isBookOpen, setIsBookOpen] = useState(false)
   const [showCover, setShowCover] = useState(true)
   const [isSecondVisit, setIsSecondVisit] = useState(false)
 
@@ -30,16 +25,14 @@ function App() {
 
   const handleCoverComplete = () => {
     setShowCover(false)
-    setIsBookOpen(true)
   }
 
   const handleChapterComplete = (chapterIndex) => {
-    if (chapterIndex < chapters.length - 1) {
+    if (chapterIndex < 5) {
       setCurrentChapter(chapterIndex + 1)
     } else {
-      // 最后一章完成
+      // 最后一章完成，回到封面
       setCurrentChapter(0)
-      setIsBookOpen(false)
       setShowCover(true)
     }
   }
@@ -65,8 +58,6 @@ function App() {
 
   return (
     <div className="app">
-      <AudioManager />
-      
       <AnimatePresence>
         {showCover && (
           <CoverPage 
@@ -76,18 +67,9 @@ function App() {
         )}
       </AnimatePresence>
 
-      {isBookOpen && (
-        <div className="book-container">
-          <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-            <Book3D 
-              currentChapter={currentChapter}
-              onChapterChange={setCurrentChapter}
-            />
-          </Canvas>
-          
-          <div className="chapter-content">
-            {renderChapter()}
-          </div>
+      {!showCover && (
+        <div className="chapter-container">
+          {renderChapter()}
         </div>
       )}
     </div>

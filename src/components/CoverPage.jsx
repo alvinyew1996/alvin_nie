@@ -7,27 +7,22 @@ const CoverPage = ({ onComplete, isSecondVisit }) => {
   const [showSubtitle, setShowSubtitle] = useState(false)
   const [showImage, setShowImage] = useState(false)
   const [showSecondVisitText, setShowSecondVisitText] = useState(false)
-  const [showDust, setShowDust] = useState(false)
   const [canFlip, setCanFlip] = useState(false)
 
   useEffect(() => {
-    // 15秒后开始翻页
+    // 15秒后可以翻页
     const timer = setTimeout(() => {
-      setShowDust(true)
-      setTimeout(() => {
-        setCanFlip(true)
-        onComplete()
-      }, 2000)
+      setCanFlip(true)
     }, 15000)
 
     return () => clearTimeout(timer)
-  }, [onComplete])
+  }, [])
 
   useEffect(() => {
     // 标题动画序列
     const titleTimer = setTimeout(() => setShowTitle(true), 1000)
     const subtitleTimer = setTimeout(() => setShowSubtitle(true), 2000)
-    const imageTimer = setTimeout(() => setShowImage(true), 3000)
+    const imageTimer = setTimeout(() => setImage(true), 3000)
     const secondVisitTimer = setTimeout(() => setShowSecondVisitText(true), 4000)
 
     return () => {
@@ -47,14 +42,13 @@ const CoverPage = ({ onComplete, isSecondVisit }) => {
     >
       {/* 星空背景 */}
       <div className="stars-background">
-        {Array.from({ length: 100 }).map((_, i) => (
+        {Array.from({ length: 50 }).map((_, i) => (
           <motion.div
             key={i}
             className="star"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`
             }}
             animate={{
               opacity: [0, 1, 0],
@@ -176,34 +170,6 @@ const CoverPage = ({ onComplete, isSecondVisit }) => {
         </div>
       </motion.div>
 
-      {/* 翻页尘粒效果 */}
-      <AnimatePresence>
-        {showDust && (
-          <div className="dust-particles">
-            {Array.from({ length: 20 }).map((_, i) => (
-              <motion.div
-                key={i}
-                className="dust-particle"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`
-                }}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ 
-                  opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
-                  y: [0, -100]
-                }}
-                transition={{
-                  duration: 3,
-                  delay: Math.random() * 1
-                }}
-              />
-            ))}
-          </div>
-        )}
-      </AnimatePresence>
-
       {/* 翻页提示 */}
       <AnimatePresence>
         {canFlip && (
@@ -212,6 +178,8 @@ const CoverPage = ({ onComplete, isSecondVisit }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
+            onClick={onComplete}
+            style={{ cursor: 'pointer' }}
           >
             <motion.div
               animate={{ y: [0, -10, 0] }}

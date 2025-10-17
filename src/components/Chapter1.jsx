@@ -5,58 +5,46 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 const Chapter1 = ({ onComplete }) => {
   const [currentPage, setCurrentPage] = useState(0)
   const [canFlip, setCanFlip] = useState(false)
-  const [showText, setShowText] = useState(false)
 
   const pages = [
     {
       id: 1,
       title: "初遇",
       subtitle: "那天的我们之间的相遇，故事的开始。",
-      image: "/images/chapter1/coffee-shop.jpg", // 面包咖啡店
+      image: "/images/chapter1/coffee-shop.jpg",
       text: "那天我怀着忐忑的心进入了自己不熟悉的领域和工作地点，但我却在那天遇见了你，在这里的一切是我和你的开始。",
       delay: 8000
     },
     {
       id: 2,
-      image: "/images/chapter1/beach-date.jpg", // 海边约会
+      image: "/images/chapter1/beach-date.jpg",
       text: "这是第一次单独约我出来去海边，愿意分享你的心事给我，那晚我心跳加速了"
     },
     {
       id: 3,
-      image: "/images/chapter1/shoulder-touch.jpg", // 搭肩膀
+      image: "/images/chapter1/shoulder-touch.jpg",
       text: "在最初遇见的三四月里，你主动的把手搭到我肩膀上了，让我很是高兴又苦恼，高兴的是你愿意靠近我了，苦恼的是我不知道该不该亲近你还是保持距离 😊"
     },
     {
       id: 4,
-      image: "/images/chapter1/early-days.jpg" // 早期照片
+      image: "/images/chapter1/early-days.jpg"
     }
   ]
 
   useEffect(() => {
-    // 播放第一章背景音乐
-    if (window.audioManager) {
-      window.audioManager.playAudio('chapter1')
-    }
-
-    // 第一页显示文字后8秒可以翻页
-    if (currentPage === 0) {
-      const timer = setTimeout(() => {
-        setShowText(true)
-        setTimeout(() => setCanFlip(true), 8000)
-      }, 2000)
-      return () => clearTimeout(timer)
-    } else {
+    const delay = currentPage === 0 ? 8000 : 3000
+    const timer = setTimeout(() => {
       setCanFlip(true)
-    }
+    }, delay)
+
+    return () => clearTimeout(timer)
   }, [currentPage])
 
   const handleNextPage = () => {
     if (currentPage < pages.length - 1) {
       setCurrentPage(currentPage + 1)
       setCanFlip(false)
-      setShowText(false)
     } else {
-      // 章节结束
       onComplete()
     }
   }
@@ -65,7 +53,6 @@ const Chapter1 = ({ onComplete }) => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1)
       setCanFlip(false)
-      setShowText(false)
     }
   }
 
@@ -104,6 +91,10 @@ const Chapter1 = ({ onComplete }) => {
               src={currentPageData.image} 
               alt={`第${currentPage + 1}张照片`}
               className="chapter-photo"
+              onError={(e) => {
+                e.target.style.display = 'none'
+                e.target.nextSibling.style.display = 'flex'
+              }}
             />
             <div className="photo-overlay">
               <div className="loading-text">照片加载中...</div>
@@ -113,7 +104,7 @@ const Chapter1 = ({ onComplete }) => {
 
         {/* 文字内容 */}
         <AnimatePresence>
-          {showText && currentPageData.text && (
+          {currentPageData.text && (
             <motion.div 
               className="page-text"
               initial={{ opacity: 0, y: 20 }}

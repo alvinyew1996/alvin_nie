@@ -11,48 +11,30 @@ const Chapter6 = ({ onComplete }) => {
   const [showStars, setShowStars] = useState(false)
   const [showMeteors, setShowMeteors] = useState(false)
 
-  const phases = [
-    'book_closing',
-    'back_cover',
-    'final_photo',
-    'final_text',
-    'meteors'
-  ]
-
   useEffect(() => {
-    // 播放第六章背景音乐
-    if (window.audioManager) {
-      window.audioManager.playAudio('chapter6')
-    }
-
     // 书本合上动画
     const timer1 = setTimeout(() => {
       setShowBookClose(true)
-      setCurrentPhase(1)
     }, 2000)
 
     // 显示背面
     const timer2 = setTimeout(() => {
       setShowBackCover(true)
-      setCurrentPhase(2)
     }, 4000)
 
     // 显示最终照片
     const timer3 = setTimeout(() => {
       setShowFinalPhoto(true)
-      setCurrentPhase(3)
     }, 7000)
 
     // 显示最终文字
     const timer4 = setTimeout(() => {
       setShowFinalText(true)
-      setCurrentPhase(4)
     }, 10000)
 
     // 显示星星和流星
     const timer5 = setTimeout(() => {
       setShowStars(true)
-      setCurrentPhase(5)
     }, 12000)
 
     const timer6 = setTimeout(() => {
@@ -168,14 +150,13 @@ const Chapter6 = ({ onComplete }) => {
         <AnimatePresence>
           {showStars && (
             <div className="final-stars">
-              {Array.from({ length: 100 }).map((_, i) => (
+              {Array.from({ length: 50 }).map((_, i) => (
                 <motion.div
                   key={i}
                   className="final-star"
                   style={{
                     left: `${Math.random() * 100}%`,
                     top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 3}s`
                   }}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ 
@@ -200,14 +181,13 @@ const Chapter6 = ({ onComplete }) => {
         <AnimatePresence>
           {showMeteors && (
             <div className="meteors">
-              {Array.from({ length: 20 }).map((_, i) => (
+              {Array.from({ length: 10 }).map((_, i) => (
                 <motion.div
                   key={i}
                   className="meteor"
                   style={{
                     left: `${Math.random() * 100}%`,
                     top: `${Math.random() * 50}%`,
-                    animationDelay: `${Math.random() * 5}s`
                   }}
                   initial={{ opacity: 0, x: 0, y: 0 }}
                   animate={{ 

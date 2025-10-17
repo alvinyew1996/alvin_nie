@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Heart, Sparkles, Rainbow } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Heart, Sparkles } from 'lucide-react'
 
 const Chapter4 = ({ onComplete }) => {
   const [currentPage, setCurrentPage] = useState(0)
   const [canFlip, setCanFlip] = useState(false)
   const [showSpecialEffect, setShowSpecialEffect] = useState(false)
-  const [showRomanticEffect, setShowRomanticEffect] = useState(false)
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
 
   const pages = [
     {
@@ -27,11 +25,6 @@ const Chapter4 = ({ onComplete }) => {
   ]
 
   useEffect(() => {
-    // 播放第四章背景音乐
-    if (window.audioManager) {
-      window.audioManager.playAudio('chapter4')
-    }
-
     const delay = getPageDelay(currentPage)
     const timer = setTimeout(() => {
       setCanFlip(true)
@@ -46,9 +39,9 @@ const Chapter4 = ({ onComplete }) => {
 
     switch (page.type) {
       case 'special_photo':
-        return 8000 // 给更多时间欣赏特殊照片
+        return 8000
       case 'special_video':
-        return 10000 // 视频播放时间
+        return 10000
       default:
         return 3000
     }
@@ -59,9 +52,7 @@ const Chapter4 = ({ onComplete }) => {
       setCurrentPage(currentPage + 1)
       setCanFlip(false)
       setShowSpecialEffect(false)
-      setShowRomanticEffect(false)
     } else {
-      // 章节结束
       onComplete()
     }
   }
@@ -71,7 +62,6 @@ const Chapter4 = ({ onComplete }) => {
       setCurrentPage(currentPage - 1)
       setCanFlip(false)
       setShowSpecialEffect(false)
-      setShowRomanticEffect(false)
     }
   }
 
@@ -80,210 +70,178 @@ const Chapter4 = ({ onComplete }) => {
   const renderPageContent = () => {
     switch (currentPageData.type) {
       case 'special_photo':
-        return renderSpecialPhoto()
+        return (
+          <motion.div 
+            className="special-photo-container"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5 }}
+            onAnimationComplete={() => {
+              setShowSpecialEffect(true)
+            }}
+          >
+            <div className="photo-placeholder special-photo">
+              <img src={currentPageData.image} alt="特殊笑容" />
+              
+              {/* 特殊特效 */}
+              <AnimatePresence>
+                {showSpecialEffect && (
+                  <motion.div 
+                    className="special-effects"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    {/* 心形粒子效果 */}
+                    {Array.from({ length: 15 }).map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="heart-particle"
+                        style={{
+                          left: `${Math.random() * 100}%`,
+                          top: `${Math.random() * 100}%`
+                        }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ 
+                          opacity: [0, 1, 0],
+                          scale: [0, 1, 0],
+                          y: [0, -50, -100]
+                        }}
+                        transition={{
+                          duration: 2,
+                          delay: Math.random() * 2,
+                          repeat: Infinity,
+                          repeatDelay: 3
+                        }}
+                      >
+                        <Heart size={16} color="#FF69B4" />
+                      </motion.div>
+                    ))}
+
+                    {/* 星光效果 */}
+                    {Array.from({ length: 10 }).map((_, i) => (
+                      <motion.div
+                        key={`sparkle-${i}`}
+                        className="sparkle-particle"
+                        style={{
+                          left: `${Math.random() * 100}%`,
+                          top: `${Math.random() * 100}%`
+                        }}
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ 
+                          opacity: [0, 1, 0],
+                          scale: [0, 1, 0],
+                          rotate: [0, 180, 360]
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          delay: Math.random() * 1.5,
+                          repeat: Infinity,
+                          repeatDelay: 2
+                        }}
+                      >
+                        <Sparkles size={12} color="#FFD700" />
+                      </motion.div>
+                    ))}
+
+                    {/* 光晕效果 */}
+                    <motion.div 
+                      className="photo-glow"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1.2, opacity: 0.6 }}
+                      transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        )
       case 'special_video':
-        return renderSpecialVideo()
+        return (
+          <motion.div 
+            className="special-video-container"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <div className="video-wrapper">
+              <video 
+                src={currentPageData.video}
+                autoPlay
+                muted={false}
+                loop={false}
+                className="special-video"
+                onEnded={() => {
+                  setCanFlip(true)
+                }}
+              />
+              
+              {/* 浪漫特效 */}
+              <motion.div 
+                className="romantic-effects"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
+              >
+                {/* 泡泡效果 */}
+                {Array.from({ length: 20 }).map((_, i) => (
+                  <motion.div
+                    key={`bubble-${i}`}
+                    className="bubble"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      bottom: '0%'
+                    }}
+                    initial={{ opacity: 0, scale: 0, y: 0 }}
+                    animate={{ 
+                      opacity: [0, 0.8, 0],
+                      scale: [0, 1, 0],
+                      y: [0, -200, -400]
+                    }}
+                    transition={{
+                      duration: 3,
+                      delay: Math.random() * 2,
+                      repeat: Infinity,
+                      repeatDelay: 1
+                    }}
+                  />
+                ))}
+
+                {/* 花瓣效果 */}
+                {Array.from({ length: 15 }).map((_, i) => (
+                  <motion.div
+                    key={`petal-${i}`}
+                    className="petal"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: '0%'
+                    }}
+                    initial={{ opacity: 0, x: 0, y: 0, rotate: 0 }}
+                    animate={{ 
+                      opacity: [0, 1, 0],
+                      x: [0, Math.random() * 100 - 50],
+                      y: [0, 300],
+                      rotate: [0, 360]
+                    }}
+                    transition={{
+                      duration: 4,
+                      delay: Math.random() * 2,
+                      repeat: Infinity,
+                      repeatDelay: 2
+                    }}
+                  >
+                    🌸
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </motion.div>
+        )
       default:
         return null
     }
   }
-
-  const renderSpecialPhoto = () => (
-    <motion.div 
-      className="special-photo-container"
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.5 }}
-      onAnimationComplete={() => {
-        setShowSpecialEffect(true)
-      }}
-    >
-      <div className="photo-placeholder special-photo">
-        <img src={currentPageData.image} alt="特殊笑容" />
-        
-        {/* 特殊特效 */}
-        <AnimatePresence>
-          {showSpecialEffect && (
-            <motion.div 
-              className="special-effects"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              {/* 心形粒子效果 */}
-              {Array.from({ length: 20 }).map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="heart-particle"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`
-                  }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ 
-                    opacity: [0, 1, 0],
-                    scale: [0, 1, 0],
-                    y: [0, -50, -100]
-                  }}
-                  transition={{
-                    duration: 2,
-                    delay: Math.random() * 2,
-                    repeat: Infinity,
-                    repeatDelay: 3
-                  }}
-                >
-                  <Heart size={16} color="#FF69B4" />
-                </motion.div>
-              ))}
-
-              {/* 星光效果 */}
-              {Array.from({ length: 15 }).map((_, i) => (
-                <motion.div
-                  key={`sparkle-${i}`}
-                  className="sparkle-particle"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`
-                  }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ 
-                    opacity: [0, 1, 0],
-                    scale: [0, 1, 0],
-                    rotate: [0, 180, 360]
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    delay: Math.random() * 1.5,
-                    repeat: Infinity,
-                    repeatDelay: 2
-                  }}
-                >
-                  <Sparkles size={12} color="#FFD700" />
-                </motion.div>
-              ))}
-
-              {/* 光晕效果 */}
-              <motion.div 
-                className="photo-glow"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1.2, opacity: 0.6 }}
-                transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.div>
-  )
-
-  const renderSpecialVideo = () => (
-    <motion.div 
-      className="special-video-container"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1 }}
-      onAnimationComplete={() => {
-        setShowRomanticEffect(true)
-        setIsVideoPlaying(true)
-        // 暂停背景音乐
-        if (window.audioManager) {
-          window.audioManager.pauseAudio()
-        }
-      }}
-    >
-      <div className="video-wrapper">
-        <video 
-          src={currentPageData.video}
-          autoPlay
-          muted={false}
-          loop={false}
-          className="special-video"
-          onEnded={() => {
-            setIsVideoPlaying(false)
-            setCanFlip(true)
-            // 恢复背景音乐
-            if (window.audioManager) {
-              window.audioManager.resumeAudio()
-            }
-          }}
-        />
-        
-        {/* 浪漫特效 */}
-        <AnimatePresence>
-          {showRomanticEffect && isVideoPlaying && (
-            <motion.div 
-              className="romantic-effects"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              {/* 彩虹效果 */}
-              <motion.div 
-                className="rainbow-effect"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 0.3 }}
-                transition={{ duration: 1, delay: 0.5 }}
-              >
-                <Rainbow size={200} color="#FF69B4" />
-              </motion.div>
-
-              {/* 泡泡效果 */}
-              {Array.from({ length: 30 }).map((_, i) => (
-                <motion.div
-                  key={`bubble-${i}`}
-                  className="bubble"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    bottom: '0%'
-                  }}
-                  initial={{ opacity: 0, scale: 0, y: 0 }}
-                  animate={{ 
-                    opacity: [0, 0.8, 0],
-                    scale: [0, 1, 0],
-                    y: [0, -200, -400]
-                  }}
-                  transition={{
-                    duration: 3,
-                    delay: Math.random() * 2,
-                    repeat: Infinity,
-                    repeatDelay: 1
-                  }}
-                />
-              ))}
-
-              {/* 花瓣效果 */}
-              {Array.from({ length: 25 }).map((_, i) => (
-                <motion.div
-                  key={`petal-${i}`}
-                  className="petal"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: '0%'
-                  }}
-                  initial={{ opacity: 0, x: 0, y: 0, rotate: 0 }}
-                  animate={{ 
-                    opacity: [0, 1, 0],
-                    x: [0, Math.random() * 100 - 50],
-                    y: [0, 300],
-                    rotate: [0, 360]
-                  }}
-                  transition={{
-                    duration: 4,
-                    delay: Math.random() * 2,
-                    repeat: Infinity,
-                    repeatDelay: 2
-                  }}
-                >
-                  🌸
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.div>
-  )
 
   return (
     <motion.div 
