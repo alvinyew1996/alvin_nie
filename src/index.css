@@ -10,43 +10,423 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  min-height: 100vh;
-  color: #333;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
 }
 
 #root {
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+.app {
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
-/* 滚动条样式 */
-::-webkit-scrollbar {
-  width: 8px;
+/* 封面页面样式 */
+.cover-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
+.stars-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
+.star {
+  position: absolute;
+  color: #fff;
+  animation: twinkle 2s infinite;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.moon {
+  position: absolute;
+  top: 20%;
+  right: 15%;
+  z-index: 10;
+}
+
+.moon-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+}
+
+.old-book {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.book-cover {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #8B4513, #A0522D);
+  border-radius: 10px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  transform-style: preserve-3d;
+}
+
+.book-spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, #654321, #8B4513);
+  border-radius: 10px 0 0 10px;
+  box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.3);
+}
+
+.book-pages {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  right: 20px;
+  bottom: 20px;
+  background: #F5F5DC;
+  border-radius: 5px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.main-title {
+  font-size: 2.5rem;
+  color: #8B4513;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #654321;
+  margin-bottom: 30px;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.second-visit-text {
+  font-size: 1rem;
+  color: #8B4513;
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+.moon-clover-image {
+  position: relative;
+  margin-top: 20px;
+}
+
+.image-placeholder {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  background: linear-gradient(135deg, #E6E6FA, #F0F8FF);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.clover {
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+.sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 1.2rem;
+  color: #FFD700;
+}
+
+.dust-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.dust-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #D2B48C;
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.flip-hint {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFD700;
+  font-size: 1.1rem;
+}
+
+.flip-hint p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+/* 书本容器 */
+.book-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+.chapter-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+/* 章节样式 */
+.chapter1, .chapter2, .chapter3, .chapter4, .chapter5, .chapter6 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+.book-page {
+  width: 90%;
+  max-width: 800px;
+  height: 90%;
+  background: #F5F5DC;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.page-title h1 {
+  font-size: 3rem;
+  color: #8B4513;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.page-title .subtitle {
+  font-size: 1.3rem;
+  color: #654321;
+  font-style: italic;
+  margin-bottom: 40px;
+}
+
+.photo-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+}
+
+.photo-placeholder {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.chapter-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.page-text {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  color: #654321;
+  line-height: 1.8;
+  max-width: 600px;
+}
+
+.page-controls {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.page-btn {
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: #8B4513;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #A0522D;
+  transform: scale(1.1);
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ccc;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: #8B4513;
+  transform: scale(1.2);
+}
+
+/* 3D书本按钮 */
+.flip-button {
+  background: #8B4513;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.flip-button:hover:not(:disabled) {
+  background: #A0522D;
+  transform: scale(1.05);
+}
+
+.flip-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 15px;
+  .old-book {
+    width: 300px;
+    height: 400px;
+  }
+  
+  .main-title {
+    font-size: 2rem;
+  }
+  
+  .book-page {
+    padding: 20px;
+  }
+  
+  .page-title h1 {
+    font-size: 2rem;
+  }
+  
+  .photo-placeholder {
+    height: 250px;
   }
 }

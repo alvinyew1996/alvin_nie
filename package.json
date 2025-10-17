@@ -1,7 +1,7 @@
 {
-  "name": "interactive-memoir",
+  "name": "interactive-memoir-3d",
   "version": "1.0.0",
-  "description": "Interactive memoir web experience",
+  "description": "3D Interactive Memoir - Our Story",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "framer-motion": "^10.16.4",
-    "lucide-react": "^0.292.0"
+    "three": "^0.158.0",
+    "@react-three/fiber": "^8.15.12",
+    "@react-three/drei": "^9.88.13",
+    "lucide-react": "^0.292.0",
+    "howler": "^2.2.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
