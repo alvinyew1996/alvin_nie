@@ -222,31 +222,31 @@ function handleChapterChange(chapterIndex) {
     
     switch(chapterIndex) {
         case 0: // 封面
-            musicController.play('cover-music');
+            musicController.play('cover_music');
             animateCover();
             break;
         case 1: // 第一章
-            musicController.play('bg-music');
+            musicController.play('bg_music');
             animateChapter1();
             break;
         case 2: // 第二章
-            musicController.play('bg-music', true); // 继续播放第一章的音乐
+            musicController.play('bg_music', true); // 继续播放第一章的音乐
             animateChapter2();
             break;
         case 3: // 第三章
-            musicController.play('left-person-music');
+            musicController.play('left_person_music');
             animateChapter3();
             break;
         case 4: // 第四章
-            musicController.play('left-person-music', true); // 继续播放第三章的音乐
+            musicController.play('left_person_music', true); // 继续播放第三章的音乐
             animateChapter4();
             break;
         case 5: // 第五章
-            musicController.play('lie-music');
+            musicController.play('lie_music');
             animateChapter5();
             break;
         case 6: // 第六章
-            musicController.play('lie-music', true); // 继续播放第五章的音乐
+            musicController.play('lie_music', true); // 继续播放第五章的音乐
             animateChapter6();
             break;
     }
@@ -1057,7 +1057,7 @@ function setupMusicControl() {
                 musicController.stop();
                 this.textContent = '🔇';
             } else {
-                musicController.play('bg-music');
+                musicController.play('bg_music');
                 this.textContent = '🎵';
             }
         });
