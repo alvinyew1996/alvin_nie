@@ -290,11 +290,33 @@ class ChapterGenerator {
         page.className = 'photo-page';
         page.setAttribute('data-page', pageIndex);
         
+        // 获取文件夹名称映射
+        const folderMap = {
+            '住过的地方': 'living-place',
+            'Lok Lok店': 'lok-lok',
+            '工作陪伴': 'work-companion',
+            'Bedok遗漏': 'bedok-memories',
+            '心疼照片': 'heartbreaking-photos',
+            '咬痕': 'bite-marks',
+            '偷拍': 'stolen-photos',
+            '搞怪照片': 'funny-photos',
+            '担心迷路': 'worried-about-lost',
+            '床单挑选': 'bed-sheet-shopping',
+            '预备饮料': 'drinks-prepared',
+            '礼篮分享': 'gift-basket',
+            '食物排队': 'food-queuing',
+            '送酒': 'thank-you-wine',
+            '陪伴感谢': 'companion-gratitude',
+            '聊天记录': 'chat-records'
+        };
+        
+        const folderName = folderMap[group.name] || group.name.toLowerCase().replace(/\s+/g, '-');
+        
         if (group.photos === 1) {
             // 单张照片
             page.innerHTML = `
                 <div class="photo-container ${group.effect || ''}">
-                    <img src="images/chapter2/${group.name.toLowerCase().replace(/\s+/g, '-')}.jpg" alt="${group.name}" class="photo">
+                    <img src="images/chapter2/${folderName}/${folderName}1.jpg" alt="${group.name}" class="photo">
                     ${group.specialNote && subPageIndex === 0 ? `<div class="special-note">${group.specialNote.text}</div>` : ''}
                 </div>
                 <div class="photo-text">${group.text}</div>
@@ -305,7 +327,7 @@ class ChapterGenerator {
                 <div class="photo-container collage-container">
                     ${Array.from({length: group.photos}, (_, i) => `
                         <div class="collage-item">
-                            <img src="images/chapter2/${group.name.toLowerCase().replace(/\s+/g, '-')}-${i + 1}.jpg" alt="${group.name} ${i + 1}" class="photo">
+                            <img src="images/chapter2/${folderName}/${folderName}${i + 1}.jpg" alt="${group.name} ${i + 1}" class="photo">
                         </div>
                     `).join('')}
                 </div>
@@ -321,7 +343,7 @@ class ChapterGenerator {
                 <div class="photo-container grid-container">
                     ${Array.from({length: endIndex - startIndex}, (_, i) => `
                         <div class="grid-item">
-                            <img src="images/chapter2/${group.name.toLowerCase().replace(/\s+/g, '-')}-${startIndex + i + 1}.jpg" alt="${group.name} ${startIndex + i + 1}" class="photo">
+                            <img src="images/chapter2/${folderName}/${folderName}${startIndex + i + 1}.jpg" alt="${group.name} ${startIndex + i + 1}" class="photo">
                         </div>
                     `).join('')}
                 </div>
