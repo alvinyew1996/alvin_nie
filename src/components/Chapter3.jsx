@@ -25,35 +25,56 @@ const Chapter3 = ({ onComplete }) => {
       id: 3,
       type: "video",
       video: "/videos/chapter3/happy-daily.mp4",
-      videoKey: "chapter3/jb-birthday",
+      videoKey: "chapter3/happy-daily",
       text: "这是我们最快乐的日常，我都会陪伴她，也许我很多东西都不会，但是我真心想要在她身边一直对她好，照顾她"
     },
     {
       id: 4,
+      type: "video",
+      video: "/videos/chapter3_airport_play.mp4",
+      videoKey: "chapter3/airport-play",
+      text: "我们一起去机场玩了，好开心。"
+    },
+    {
+      id: 5,
+      type: "video",
+      video: "/videos/chapter3_gift_giving.mp4",
+      videoKey: "chapter3/gift-giving",
+      text: "这是真正意义上这一次送你的礼物（放一个很紧张很心动的表情）。"
+    },
+    {
+      id: 6,
+      type: "video",
+      video: "/videos/chapter3_jb_cats.mp4",
+      videoKey: "chapter3/jb-cats",
+      text: "在jb时其实很想带她去逗猫可是时间不够"
+    },
+    {
+      id: 7,
       type: "dual_images",
       images: ["/images/chapter3/home-clothes-1.jpg", "/images/chapter3/home-clothes-2.jpg"],
       text: "来到新加坡以后第一次回家乡还是想到了你，也是第一次帮你和你爸爸买了衣裤。"
     },
     {
-      id: 5,
+      id: 8,
       type: "single_image",
       image: "/images/chapter3/watch-basketball.jpg",
       text: "借用你的手表去打球了嘻嘻，也很感谢你偶尔会去球场看我打球甚至是比赛，我都会非常高兴。"
     },
     {
-      id: 6,
+      id: 9,
       type: "gift_series",
       images: ["/images/chapter3/gift-1.jpg", "/images/chapter3/gift-2.jpg", "/images/chapter3/gift-3.jpg", "/images/chapter3/gift-4.jpg"],
       text: "就算是陪家人一起过节，我偷偷的为了你排了一个小时多的队就只为了可以买到你说你很喜欢的系列。"
     },
     {
-      id: 7,
+      id: 10,
       type: "sunrise",
       images: ["/images/chapter3/sunrise-1.jpg", "/images/chapter3/sunrise-2.jpg", "/images/chapter3/sunrise-3.jpg"],
       text: "我们一起看过最美的日出"
     },
     {
-      id: 8,
+      id: 11,
       type: "ending",
       text: "那时我们以为，只要一直走下去，就能到达幸福的远方。"
     }

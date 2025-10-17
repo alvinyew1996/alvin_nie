@@ -35,19 +35,19 @@ export const MEDIA_CONFIG = {
       cloudinary: 'videos_chapter4_important_smile_cxvpxn', // ✅ 已确认 (92.62 MB)
     },
     
-    // 小容量视频 - GitHub (待添加)
-    // 'chapter3/small-video-1': {
-    //   local: '/videos/chapter3/small-video-1.mp4',
-    // },
-    // 'chapter3/small-video-2': {
-    //   local: '/videos/chapter3/small-video-2.mp4',
-    // },
-    // 'chapter3/small-video-3': {
-    //   local: '/videos/chapter3/small-video-3.mp4',
-    // },
-    // 'chapter4/small-video-4': {
-    //   local: '/videos/chapter4/small-video-4.mp4',
-    // },
+    // 小容量视频 - GitHub (已上传)
+    'chapter3/airport-play': {
+      local: '/videos/chapter3_airport_play.mp4', // 1.55 MB
+    },
+    'chapter3/gift-giving': {
+      local: '/videos/chapter3_gift_giving.mp4', // 1.53 MB
+    },
+    'chapter3/happy-daily': {
+      local: '/videos/chapter3_happy_daily.mp4', // 2.44 MB
+    },
+    'chapter3/jb-cats': {
+      local: '/videos/chapter3_jb_cats.mp4', // 4.93 MB
+    },
   },
   
   // 图片文件映射 (稍后添加)
