@@ -25,7 +25,7 @@ const Chapter3 = ({ onComplete }) => {
       id: 3,
       type: "video",
       video: "/videos/chapter3/happy-daily.mp4",
-      videoKey: "chapter3/happy-daily",
+      videoKey: "chapter3/jb-birthday",
       text: "这是我们最快乐的日常，我都会陪伴她，也许我很多东西都不会，但是我真心想要在她身边一直对她好，照顾她"
     },
     {

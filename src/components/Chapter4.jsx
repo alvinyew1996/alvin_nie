@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Heart, Sparkles } from 'lucide-react'
+import { getVideoUrl } from '../config/mediaConfig'
 
 const Chapter4 = ({ onComplete }) => {
   const [currentPage, setCurrentPage] = useState(0)
@@ -20,6 +21,7 @@ const Chapter4 = ({ onComplete }) => {
       id: 2,
       type: "special_video",
       video: "/videos/chapter4/special-moment.mp4",
+      videoKey: "chapter4/special-smile",
       text: "那一刻，我只想让时间停在这里。"
     }
   ]
