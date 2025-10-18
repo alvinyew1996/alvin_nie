@@ -151,6 +151,18 @@ git push -u origin main
 3. **添加音频**：将音频文件放入audio文件夹中
 4. **自定义内容**：修改`chapter-generator.js`中的数据结构
 
+### Git LFS 支持
+
+本项目已配置 Git LFS 来管理大型媒体文件。添加新的音频、视频或图片文件时，它们会自动通过 Git LFS 进行跟踪和管理。
+
+详细的使用指南请参考 [GIT_LFS_GUIDE.md](./GIT_LFS_GUIDE.md)
+
+**支持的文件类型**：
+- 音频：mp3, wav, m4a, aac, ogg, flac
+- 视频：mp4, mov, avi, mkv, wmv, flv, webm
+- 图片：jpg, jpeg, png, gif, bmp, tiff, webp, svg, psd, ai
+- 其他：zip, tar, gz, rar, 7z, pdf
+
 ## 浏览器支持
 
 - Chrome 60+
