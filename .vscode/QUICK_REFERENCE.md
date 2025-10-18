@@ -59,7 +59,7 @@ Method 3: Press F5 to debug
 4. Code will pause at breakpoints
 
 ### Format Code
-- **Auto**: Saves automatically format (enabled)
+- **Auto**: Automatically formats on save (enabled)
 - **Manual**: `Shift+Alt+F`
 - **Selection**: Select code → `Shift+Alt+F`
 
