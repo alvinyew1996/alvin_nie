@@ -137,6 +137,32 @@ For a better Git LFS experience, install these extensions:
 2. **Git Graph** - 可视化 Git 历史 / Visualize Git history
 3. **Git History** - 查看文件历史 / View file history
 
+## 关于 .gitignore 的重要说明 / Important Note About .gitignore
+
+本仓库的 `.gitignore` 配置了忽略 `audio/`、`images/` 和 `videos/` 文件夹中的媒体文件。已经在 Git 中跟踪的文件不受影响，但新添加的文件需要使用 `git add -f` 强制添加：
+
+The `.gitignore` in this repository is configured to ignore media files in `audio/`, `images/`, and `videos/` folders. Files already tracked in Git are not affected, but newly added files need to be force-added using `git add -f`:
+
+```bash
+# 强制添加被忽略的文件 / Force add ignored files
+git add -f audio/new-song.mp3
+git add -f images/chapter1/new-photo.jpg
+
+# 提交并推送 / Commit and push
+git commit -m "Add new media files"
+git push
+```
+
+**或者**，如果你想让这些文件夹可以自由添加文件，可以修改 `.gitignore`：
+**Alternatively**, if you want these folders to freely accept files, modify `.gitignore`:
+
+```bash
+# 注释掉或删除这些行 / Comment out or remove these lines
+# audio/**/*.mp3
+# images/chapter*/**/*.jpg
+# videos/chapter*/**/*.mp4
+```
+
 ## 常见问题 / Common Issues
 
 ### 问题1：克隆时文件未下载 / Issue 1: Files Not Downloaded When Cloning
