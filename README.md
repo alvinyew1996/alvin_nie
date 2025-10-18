@@ -155,7 +155,9 @@ git push -u origin main
 
 本项目已配置 Git LFS 来管理大型媒体文件。添加新的音频、视频或图片文件时，它们会自动通过 Git LFS 进行跟踪和管理。
 
-详细的使用指南请参考 [GIT_LFS_GUIDE.md](./GIT_LFS_GUIDE.md)
+**使用指南**：
+- [GIT_LFS_GUIDE.md](./GIT_LFS_GUIDE.md) - 完整的 Git LFS 使用指南
+- [VSCODE_LFS_GUIDE.md](./VSCODE_LFS_GUIDE.md) - VS Code 中使用 Git LFS 的快速指南
 
 **支持的文件类型**：
 - 音频：mp3, wav, m4a, aac, ogg, flac
