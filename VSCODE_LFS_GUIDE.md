@@ -24,8 +24,7 @@
 ### 方法 2：使用 VS Code 集成终端（推荐）/ Method 2: Using VS Code Integrated Terminal (Recommended)
 
 1. **打开终端 / Open Terminal**
-   - 快捷键：`` Ctrl+` `` (反引号键)
-   - Shortcut: `` Ctrl+` `` (backtick key)
+   - 快捷键 / Shortcut: `` Ctrl+` `` (反引号键 / backtick key)
 
 2. **强制添加文件 / Force Add Files**
    ```bash
@@ -209,7 +208,7 @@ git lfs track "*.mp3"
 |--------------|---------------|-----|
 | 源代码管理 / Source Control | `Ctrl+Shift+G` | `⌘+Shift+G` |
 | 打开终端 / Open Terminal | `` Ctrl+` `` | `` ⌘+` `` |
-| 新终端 / New Terminal | `Ctrl+Shift+` `` | `⌘+Shift+` `` |
+| 新终端 / New Terminal | `` Ctrl+Shift+` `` | `` ⌘+Shift+` `` |
 | 命令面板 / Command Palette | `Ctrl+Shift+P` | `⌘+Shift+P` |
 
 ## 完整示例工作流程 / Complete Example Workflow
