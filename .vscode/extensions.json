@@ -1,0 +1,35 @@
+{
+  "recommendations": [
+    // Essential for this project
+    "esbenp.prettier-vscode",        // Code formatter
+    "dbaeumer.vscode-eslint",        // JavaScript linting
+    "ritwickdey.liveserver",         // Live development server (alternative)
+    
+    // Three.js and WebGL support
+    "slevesque.shader",              // Shader language support (for GLSL)
+    "raczzalan.webgl-glsl-editor",   // WebGL/GLSL syntax highlighting
+    
+    // General web development
+    "formulahendry.auto-rename-tag", // Auto rename paired HTML tags
+    "zignd.html-css-class-completion", // CSS class completion
+    "pranaygp.vscode-css-peek",      // CSS peek definition
+    "christian-kohler.path-intellisense", // Path autocomplete
+    
+    // Git support
+    "eamodio.gitlens",               // Enhanced Git features
+    "mhutchie.git-graph",            // Git graph visualization
+    
+    // Code quality
+    "streetsidesoftware.code-spell-checker", // Spell checker
+    "usernamehw.errorlens",          // Inline error display
+    
+    // Productivity
+    "aaron-bond.better-comments",    // Better comment highlighting
+    "wayou.vscode-todo-highlight",   // TODO highlight
+    "ritwickdey.LiveServer",         // Live Server for quick preview
+    
+    // Vite support
+    "antfu.vite"                     // Vite integration
+  ],
+  "unwantedRecommendations": []
+}

@@ -1,0 +1,72 @@
+{
+  // Editor settings
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  
+  // File associations
+  "files.associations": {
+    "*.js": "javascript",
+    "*.html": "html",
+    "*.css": "css"
+  },
+  
+  // Search exclusions
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.git": true,
+    "**/package-lock.json": true
+  },
+  
+  // File exclusions
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true
+  },
+  
+  // JavaScript/TypeScript settings
+  "javascript.suggest.autoImports": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.preferences.quoteStyle": "single",
+  
+  // Emmet
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  
+  // Terminal
+  "terminal.integrated.defaultProfile.linux": "bash",
+  
+  // Live Server settings (if using Live Server extension)
+  "liveServer.settings.port": 3000,
+  "liveServer.settings.root": "/",
+  
+  // CSS
+  "css.validate": true,
+  
+  // HTML
+  "html.format.wrapLineLength": 120,
+  "html.format.wrapAttributes": "auto",
+  
+  // Better comments
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  
+  // Git
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "git.confirmSync": false
+}

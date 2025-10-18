@@ -59,7 +59,19 @@
 
 ## 快速开始
 
-### 方法一：使用设置脚本
+### 方法一：使用VS Code（推荐）
+如果您使用Visual Studio Code，本项目已配置完整的开发环境：
+```bash
+# 在VS Code中打开项目
+code .
+
+# VS Code将提示安装推荐的扩展
+# 安装完成后，按 Ctrl+Shift+P，选择 "Tasks: Run Task" → "vite: dev"
+```
+
+📖 **详细VS Code设置指南**: 请查看 [VSCODE_SETUP.md](./VSCODE_SETUP.md)
+
+### 方法二：使用设置脚本
 ```bash
 # 运行项目设置
 ./start.sh
@@ -68,7 +80,7 @@
 ./github-setup.sh
 ```
 
-### 方法二：手动设置
+### 方法三：手动设置
 
 1. 安装依赖：
 ```bash
